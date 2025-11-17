@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as Select from "@radix-ui/react-select";
 import { ArrowUpIcon } from "../../atoms/Icons/ArrowUpIcon";
+import { ArrowDownIcon } from "../../atoms/Icons/ArrowDownIcon";
 
 type DropdownProps = {
   label: string;
@@ -21,15 +22,13 @@ export const Dropdown: React.FC<DropdownProps> = ({ label, description, items })
       <Select.Root value={selectedItem} onValueChange={setSelectedItem} onOpenChange={setIsOpen}>
         <Select.Trigger
            className="w-64 px-4 py-3 bg-white border border-gray-300 rounded-none text-left flex items-center justify-between
-            hover:border-gray-400 outline-none transition-colors data-[state=open]:border-gray-500 data-[state=open]:ring-1 data-[state=open]:ring-gray-500"
+            hover:border-gray-400 transition-colors data-[state=open]:border-gray-900"
         >
           <Select.Value placeholder={label}>
             <span className="text-gray-900">{selectedItem}</span>
           </Select.Value>
-          <Select.Icon
-            className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
-          >
-            <ArrowUpIcon />
+          <Select.Icon>
+            {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon /> }
           </Select.Icon>
         </Select.Trigger>
 
