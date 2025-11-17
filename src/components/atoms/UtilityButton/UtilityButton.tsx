@@ -18,16 +18,16 @@ export const UtilityButton: React.FC<UtilityButtonProps> = ({
   disabled = false,
   variant = 'square',
   className = '',
-  size = 40,
+  size = 32,
 }) => {
   const base = `inline-flex items-center justify-center border transition-colors duration-200`;
 
   const shape = variant === 'round' ? 'rounded-full' : 'rounded-none';
 
   const states = cn({
-    'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed': disabled,
-    'bg-gray-800 border-gray-800 text-white': selected && !disabled,
-    'bg-white border-gray-300 text-gray-700 hover:border-gray-500 hover:bg-gray-50':
+    'border-element text-icon cursor-not-allowed': disabled,
+    'bg-primary border-primary text-white': selected && !disabled,
+    'bg-white border-element text-primary hover:border-primary hover:bg-white':
       !selected && !disabled,
   });
 

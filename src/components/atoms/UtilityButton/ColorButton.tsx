@@ -18,16 +18,21 @@ export const ColorButton = ({
     variant="round"
     onClick={onClick}
     className={cn(
-      'border-2',
+      'border-1',
       {
-        'border-gray-900': selected,
+        'border-primary': selected,
       },
       className,
     )}
+    size={40}
   >
     <span
       className="block rounded-full"
-      style={{ width: 32, height: 32, backgroundColor: color }}
+      style={{
+        width: 30,
+        height: 30,
+        backgroundColor: color,
+      }}
     />
   </UtilityButton>
 );

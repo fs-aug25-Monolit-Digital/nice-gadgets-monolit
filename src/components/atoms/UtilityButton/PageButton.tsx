@@ -10,7 +10,7 @@ interface PageButtonProps {
 }
 
 export const PageButton = ({ page, selected, disabled, onClick, className }: PageButtonProps) => (
-  <UtilityButton selected={selected} disabled={disabled} onClick={onClick} className={cn("", className)}>
+  <UtilityButton size={32} selected={selected} disabled={disabled} onClick={onClick} className={cn("", className)}>
     {page}
   </UtilityButton>
 );

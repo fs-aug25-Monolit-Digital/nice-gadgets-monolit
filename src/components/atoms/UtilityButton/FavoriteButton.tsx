@@ -3,11 +3,11 @@ import { UtilityButton } from './UtilityButton';
 import { HeartIcon } from '../Icons/HeartIcon';
 import { HeartFilledIcon } from '../Icons/HeartFilledIcon';
 
-
 type FavoriteButtonProps = {
   selected?: boolean;
   onClick?: () => void;
   className?: string;
+  size?: number;
 };
 
 export const FavoriteButton = ({
@@ -17,13 +17,11 @@ export const FavoriteButton = ({
 }: FavoriteButtonProps) => (
   <UtilityButton
     onClick={onClick}
-    className={cn(
-      {},
-      className,
-    )}
+    className={cn(className)}
+    size={40}
   >
     {selected ?
-      <HeartFilledIcon className="w-6 h-6" />
-    : <HeartIcon className="w-6 h-6" />}
+      <HeartFilledIcon className="w-[16px] h-[16px]" />
+    : <HeartIcon className="w-[16px] h-[16px]" />}
   </UtilityButton>
 );

@@ -14,7 +14,10 @@ export const ArrowButton = ({ disabled, onClick, className }: ArrowButtonProps) 
     disabled={disabled}
     onClick={onClick}
     className={cn('', className)}
+    size={32}
   >
-    <ArrowRightIcon/>
+    {disabled ?
+      <ArrowRightIcon />
+    : <ArrowRightIcon className={cn(' text-primary', className)} />}
   </UtilityButton>
 );
