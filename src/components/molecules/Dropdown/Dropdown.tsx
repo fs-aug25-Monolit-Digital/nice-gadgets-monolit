@@ -21,11 +21,11 @@ export const Dropdown: React.FC<DropdownProps> = ({ label, description, items })
       
       <Select.Root value={selectedItem} onValueChange={setSelectedItem} onOpenChange={setIsOpen}>
         <Select.Trigger
-           className="w-64 px-4 py-3 bg-white border border-gray-300 rounded-none text-left flex items-center justify-between
-            hover:border-gray-400 transition-colors data-[state=open]:border-gray-900"
+           className="w-(--dropdown-width) px-4 py-3 bg-white border border-(--dropdown-border) rounded-none text-left flex items-center justify-between
+            hover:border-(--dropdown-border-hover) transition-colors data-[state=open]:border-(--dropdown-border)"
         >
           <Select.Value placeholder={label}>
-            <span className="text-gray-900">{selectedItem}</span>
+            <span className="text-(--dropdown-selected-text)">{selectedItem}</span>
           </Select.Value>
           <Select.Icon>
             {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon /> }
@@ -34,7 +34,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ label, description, items })
 
         <Select.Portal>
           <Select.Content
-            className="w-64 bg-white border border-gray-300 rounded-none shadow-lg overflow-hidden z-50"
+            className="w-(--dropdown-width) bg-(--color-white) border border-(--dropdown-border) rounded-none shadow-(--dropdown-shadow) overflow-hidden z-50"
             position="popper"
             sideOffset={4}
           >
@@ -48,7 +48,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ label, description, items })
                   }`}
                 >
                   <Select.ItemText>
-                    <span className="text-gray-700">{item}</span>
+                    <span className="text-(--dropdown-item-text)">{item}</span>
                   </Select.ItemText>
                 </Select.Item>
               ))}

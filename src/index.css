@@ -13,4 +13,13 @@
   --color-white: #ffffff;
   --color-accent-green: #27ae60;
   --color-accent-red: #eb5757;
+
+  --dropdown-width: 16rem;
+  --dropdown-border: #d1d5db;
+  --dropdown-border-hover: #9ca3af;
+  --dropdown-border-active: #111827;
+  --dropdown-item-bg-hover: #f9fafb;
+  --dropdown-item-text: #4b5563;
+  --dropdown-selected-text: #111827;
+  --dropdown-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
