@@ -21,8 +21,7 @@ export const MenuButton = ({
     width={width}
     height={height}
   >
-    <MenuIcon
-      className={cn(
+    <MenuIcon className={cn(
         'w-[16px] h-[16px]',
         'transition-transform duration-200 ease-in-out',
         'group-hover:scale-130',
