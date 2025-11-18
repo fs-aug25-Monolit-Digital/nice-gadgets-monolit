@@ -1,5 +1,5 @@
 import React from 'react';
-import cn from 'classnames';
+import cn from 'clsx';
 
 interface UtilityButtonProps {
   children?: React.ReactNode;
@@ -35,8 +35,7 @@ export const UtilityButton: React.FC<UtilityButtonProps> = ({
 
   return (
     <button
-      style={{ width, height }}
-      className={cn(base, shape, states, className)}
+      className={cn(base, shape, states, width, height, className)}
       onClick={onClick}
       disabled={disabled}
     >
