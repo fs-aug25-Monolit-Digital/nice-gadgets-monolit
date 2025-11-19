@@ -17,7 +17,6 @@ export const GridForProducts: React.FC<GridForProductsProps> = ({ products }) =>
       lg:grid-cols-[repeat(4,minmax(230px,288px))]
       gap-x-4
       gap-y-10
-      px-6
     ">
       {products?.map((product) => (
         <ProductCard key={product.id} product={product} />
