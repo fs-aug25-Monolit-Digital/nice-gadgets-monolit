@@ -1,6 +1,6 @@
 import React from "react";
 import cn from "classnames";
-import { NAV_ITEMS } from "../molecules/Navbar/Navbar";
+import { NAV_ITEMS } from "../molecules/HeaderActions/Navbar";
 import { Logo } from "../atoms/Logo/Logo";
 import { CloseButton } from "../atoms/UtilityButton";
 import { FavoriteButtonWithBadge } from "../atoms/UtilityButton/FavoriteButtonWithBadge";
@@ -62,8 +62,8 @@ export const MobileMenu: React.FC<Props> = ({
 
       {/* Bottom action bar */}
       <div className="flex border-t border-element">
-        <FavoriteButtonWithBadge className="flex-1 h-12" count={10}/>
-        <ShoppingBagWithBadgeButton className="flex-1 h-12" countBag={3}/>
+        <FavoriteButtonWithBadge className="flex-1 h-12"/>
+        <ShoppingBagWithBadgeButton className="flex-1 h-12"/>
       </div>
     </div>
   );

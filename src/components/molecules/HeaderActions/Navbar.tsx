@@ -5,6 +5,7 @@ type Props = {
   className?: string;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const NAV_ITEMS = ["Home", "Phones", "Tablets", "Accessories"];
 
 export const Navbar: React.FC<Props> = ({ className }) => {
@@ -34,7 +35,7 @@ export const Navbar: React.FC<Props> = ({ className }) => {
             {item}
 
             {isActive && (
-              <span className="absolute left-0 bottom-0 w-full h-[3px] bg-primary"></span>
+              <span className="absolute left-0 bottom-0 w-full h-[3px] bg-primary origin-left animate-underline"></span>
             )}
           </button>
         );
