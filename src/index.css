@@ -43,7 +43,13 @@
     @apply text-primary font-extrabold leading-[41px] md:leading-14 text-[32px] md:text-[48px] tracking-[-1%];
   }
   .h2 {
-    @apply text-primary font-extrabold leading-[41px] text-[22px] md:text-[32px] tracking-[-1%];
+    @apply text-primary font-extrabold leading-[41px] text-[22px] md:text-[32px];
+  }
+  .h4 {
+    @apply text-primary font-bold leading-none text-[20px] md:font-semibold;
+  }
+  .body-text {
+    @apply text-secondary font-normal leading-[21px] text-[14px];
   }
 }
 
