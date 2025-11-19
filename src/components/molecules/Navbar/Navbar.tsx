@@ -1,14 +1,44 @@
-type Props = {
-  className: string
-}
+import React, { useState } from "react";
+import cn from "classnames";
 
-export const Navbar: React.FC<Props> = ({className}) => {
+type Props = {
+  className?: string;
+};
+
+export const NAV_ITEMS = ["Home", "Phones", "Tablets", "Accessories"];
+
+export const Navbar: React.FC<Props> = ({ className }) => {
+  const [activeItem, setActiveItem] = useState("Home");
+
   return (
-    <nav className={`hidden md:flex items-center text-xs uppercase font-extrabold text-secondary md:gap-8 lg:gap-16 ${className}`}>
-      <a href="/" className="text-secondary">HOME</a>
-      <a href="/phones" className="text-secondary">PHONES</a>
-      <a href="/tablets" className="text-secondary">TABLETS</a>
-      <a href="/accessories" className="text-secondary">ACCESSORIES</a>
+    <nav
+      className={cn(
+        "hidden md:flex items-center h-full text-xs font-extrabold text-secondary md:gap-8 lg:gap-16",
+        className
+      )}
+    >
+      {NAV_ITEMS.map(item => {
+        const isActive = activeItem === item;
+
+        return (
+          <button
+            key={item}
+            onClick={() => setActiveItem(item)}
+            className={cn(
+              "relative h-full flex items-center uppercase px-1 py-0 leading-none transition-colors",
+              isActive
+                ? "text-primary"
+                : "text-secondary hover:text-primary"
+            )}
+          >
+            {item}
+
+            {isActive && (
+              <span className="absolute left-0 bottom-0 w-full h-[3px] bg-primary"></span>
+            )}
+          </button>
+        );
+      })}
     </nav>
   );
 };

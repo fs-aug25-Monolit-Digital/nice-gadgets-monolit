@@ -22,7 +22,7 @@ export const UtilityButton: React.FC<UtilityButtonProps> = ({
   width = 32,
   height = 32,
 }) => {
-  const base = `inline-flex items-center justify-center border transition-colors duration-200`;
+  const base = `inline-flex items-center justify-center border box-border transition-colors duration-200`;
 
   const shape = variant === 'round' ? 'rounded-full' : 'rounded-none';
 
@@ -35,8 +35,7 @@ export const UtilityButton: React.FC<UtilityButtonProps> = ({
 
   return (
     <button
-      style={{ width, height }}
-      className={cn(base, shape, states, className)}
+      className={cn(base, shape, states, width, height, className)}
       onClick={onClick}
       disabled={disabled}
     >
