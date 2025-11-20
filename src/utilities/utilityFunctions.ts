@@ -20,10 +20,11 @@ const normalizeCategory = (value: string): Category => {
 };
 
 // Приводимо products.json → SimpleProduct[]
-export const preparedSimpleProducts: SimpleProduct[] = (allSimpleProductsRaw as any[]).map(p => ({
-  ...p,
-  category: normalizeCategory(p.category),
-}));
+export const preparedSimpleProducts: SimpleProduct[] =
+  (allSimpleProductsRaw as SimpleProduct[]).map(p => ({
+    ...p,
+    category: normalizeCategory(p.category),
+  }));
 
 // Map itemId → DetailedProduct
 const productDetailsMap = new Map<string, DetailedProduct>();
