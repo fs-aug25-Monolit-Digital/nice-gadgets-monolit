@@ -19,7 +19,7 @@ export const FavoritesTemplate: React.FC<FavoritesTemplateProps> = ({ products }
     <section className="container mx-auto md:m-0">
 
       <div className="mb-8 mt-6">
-        <h1 className="sm:text-[32px] sm md:text-[48px] font-bold text-primary mb-2 tracking-tight">
+        <h1 className="sm:text-[32px] md:text-[48px] font-bold text-primary mb-2 tracking-tight">
           Favourites
         </h1>
         <p className="text-secondary text-sm font-semibold">
