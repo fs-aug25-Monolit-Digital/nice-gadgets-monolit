@@ -7,6 +7,7 @@ type FavoritesTemplateProps = {
 };
 
 export const FavoritesTemplate: React.FC<FavoritesTemplateProps> = ({ products }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [items, setItems] = useState<CategoryProduct[]>(products);
   const [isEmpty, setIsEmpty] = useState(items.length === 0);
 
@@ -15,7 +16,7 @@ export const FavoritesTemplate: React.FC<FavoritesTemplateProps> = ({ products }
   }, [items]);
 
   return (
-    <div className="container mx-auto px-4 md:px-6 xl:px-0 max-w-[1136px]">
+    <section className="container max-w-[1136px]">
 
       <div className="mb-8 mt-6">
         <h1 className="sm:text-[32px] md:text-[48px] font-bold text-primary mb-2 tracking-tight">
@@ -46,6 +47,6 @@ export const FavoritesTemplate: React.FC<FavoritesTemplateProps> = ({ products }
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 };
