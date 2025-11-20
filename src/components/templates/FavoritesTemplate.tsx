@@ -16,14 +16,16 @@ export const FavoritesTemplate: React.FC<FavoritesTemplateProps> = ({ products }
   }, [items]);
 
   return (
-    <section className="container max-w-[1136px]">
+    <section className="container mx-auto md:m-0">
 
       <div className="mb-8 mt-6">
-        <h1 className="sm:text-[32px] md:text-[48px] font-bold text-primary mb-2 tracking-tight">
+        <h1 className="sm:text-[32px] sm md:text-[48px] font-bold text-primary mb-2 tracking-tight">
           Favourites
         </h1>
         <p className="text-secondary text-sm font-semibold">
-          {items.length} items
+          {items.length === 0
+            ? ''
+            : `${items.length} item${items.length !== 1 ? 's' : ''}`}
         </p>
       </div>
 
@@ -39,9 +41,9 @@ export const FavoritesTemplate: React.FC<FavoritesTemplateProps> = ({ products }
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 min-[570px]:grid-cols-2 min-[855px]:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-10 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 gap-y-10 mb-20">
           {items.map((product) => (
-            <div key={product.id} className="flex justify-center">
+            <div key={product.id} className="flex sm:justify-start justify-center w-full">
               <ProductCard product={product} />
             </div>
           ))}
