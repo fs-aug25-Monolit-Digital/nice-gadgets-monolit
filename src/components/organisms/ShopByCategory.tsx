@@ -14,7 +14,7 @@ export const ShopByCategory: React.FC<Props> = ({
   colors,
 }) => {
   return (
-    <section className="mx-auto w-fit">
+    <section className="w-fit">
       <h2 className="h2 mb-6">{title}</h2>
       <article className="flex flex-col gap-8 md:flex-row md:gap-4">
         {CATEGORIES.map((category, categoryIndex) => {
