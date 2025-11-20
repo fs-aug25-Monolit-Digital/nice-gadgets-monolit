@@ -12,7 +12,7 @@ type Props = {
   categoryColors: string[];
   categoriesCount: number[];
   secondSliderTitle: string;
-  secondliderProducts: CategoryProduct[];
+  secondSliderProducts: CategoryProduct[];
 };
 
 export const HomePageTemplate: React.FC<Props> = ({
@@ -24,7 +24,7 @@ export const HomePageTemplate: React.FC<Props> = ({
   categoryColors,
   categoriesCount,
   secondSliderTitle,
-  secondliderProducts,
+  secondSliderProducts,
 }) => {
   return (
     <section>
@@ -43,7 +43,7 @@ export const HomePageTemplate: React.FC<Props> = ({
         />
         <ProductSlider
           title={secondSliderTitle}
-          products={secondliderProducts}
+          products={secondSliderProducts}
         />
       </div>
     </section>
