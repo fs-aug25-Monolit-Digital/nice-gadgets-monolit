@@ -4,17 +4,18 @@ import { Dropdown } from "../../molecules/Dropdown/Dropdown";
 import { GridForProducts } from "../GridForProducts";
 import { Pagination } from "./Pagination";
 import type { CategoryProduct } from "../../../types/CategoryProduct";
+import type { SortOption } from "../../../types/SortProducts";
 
 type Props = {
   title: string;
-  products?: CategoryProduct[];
+  products: CategoryProduct[];
   totalProducts: number;
 
-  sort: string;
+  sort: SortOption;
   perPage: number;
   currentPage: number;
   onSortChange?: (value: string) => void;
-  onPageChange?: (page: number) => void;
+  onPageChange: (page: number) => void;
   onPerPageChange?: (value: string) => void;
 };
 
@@ -30,7 +31,8 @@ export const ProductsPageTemplate: React.FC<Props> = ({
   onPerPageChange,
 }) => {
   return (
-    <section className="w-ful">
+    <section className="w-full flex flex-col">
+      <div className="w-full mb-6">
         <div className='flex items-center gap-2 text-sm text-secondary mb-6 lg:mb-10'>
           <HomeButton />
           <ArrowLeftIcon />
@@ -63,19 +65,18 @@ export const ProductsPageTemplate: React.FC<Props> = ({
             className='lg:w-32'
           />
         </div>
-          
-        < GridForProducts products={products}/>
-
-          <div className='flex justify-center items-center'>
-            <Pagination  
-              totalProducts={totalProducts}
-              itemsPerPage={perPage}
-              currentPage={currentPage}
-              onPageChange={onPageChange}
-            />
-          </div>
-
       </div>
+      </div>
+
+      <GridForProducts products={products}/>
+        <div className='flex justify-center items-center'>
+          <Pagination  
+            totalProducts={totalProducts}
+            itemsPerPage={perPage}
+            currentPage={currentPage}
+            onPageChange={onPageChange}
+          />
+        </div>
   </section>
   );
 };

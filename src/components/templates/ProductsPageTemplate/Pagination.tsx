@@ -1,4 +1,3 @@
-// import cn from "classnames";
 import { ArrowLeftButton, ArrowRightButton, PageButton } from "../../atoms/UtilityButton";
 
 type PaginationProps = {
@@ -21,7 +20,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   const endButton = Math.min(totalPages, startButton + visibleButtons - 1);
 
   const buttons = [];
-
+  // Generate each page number between startButton and endButton
   for (let i = startButton; i <= endButton; i++) {
     buttons.push(i);
   }
@@ -56,7 +55,6 @@ export const Pagination: React.FC<PaginationProps> = ({
               key={page}
               page={page}
               selected={page === currentPage}
-              disabled={false}
               onClick={() => onPageChange(page)}
             />
           );

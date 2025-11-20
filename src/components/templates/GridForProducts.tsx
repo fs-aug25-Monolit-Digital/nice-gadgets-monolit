@@ -2,7 +2,7 @@ import { ProductCard } from "../organisms/ProductCard/ProductCard"
 import type { CategoryProduct } from "../../types/CategoryProduct"; 
  
 type GridForProductsProps = { 
-  products?: CategoryProduct[], 
+  products: CategoryProduct[], 
 } 
  
 export const GridForProducts: React.FC<GridForProductsProps> = ({ products }) => { 
