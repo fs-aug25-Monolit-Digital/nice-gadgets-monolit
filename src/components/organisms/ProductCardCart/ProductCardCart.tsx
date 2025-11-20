@@ -15,7 +15,7 @@ export const ProductCardCart: React.FC<ProductCardCartProps> = ({ cartProduct })
     <div className="flex flex-col md:flex-row md:items-center md:justify-between p-4 md:p-6 border border-element">
       <div className="flex items-center justify-between gap-x-4 md:gap-x-6">
         <div className="flex items-center flex-shrink-0 gap-x-4 md:gap-x-6">
-          <CloseIcon/>
+          <CloseIcon />
           <div className="h-[66px] flex items-center justify-center m-[7px]">
             <img
               src={cartProduct.images[0]}
@@ -24,12 +24,10 @@ export const ProductCardCart: React.FC<ProductCardCartProps> = ({ cartProduct })
             />
           </div>
         </div>
-        <h3 className="text-[14px] text-primary font-normal word-break">
-            {cartProduct.name}
-          </h3>
+          <h3 className="text-[14px] text-primary font-normal break-words md:pr-4">{cartProduct.name}</h3>
       </div>
       <div className="flex justify-between items-center mt-4 md:mt-0 md:gap-x-10">
-        <div className="flex items-center md:ml-6">
+        <div className="flex items-center">
           <PlusButton
             className="w-[32px] h-[32px]"
             onClick={() => setCount((prev) => prev + 1)}
@@ -40,7 +38,11 @@ export const ProductCardCart: React.FC<ProductCardCartProps> = ({ cartProduct })
             onClick={() => setCount((previous) => previous - 1)}
           />
         </div>
-        <p className="text-[22px] text-primary font-extrabold">{cartProduct.priceDiscount? `$${cartProduct.priceDiscount}`: `$${cartProduct.priceRegular}`}</p>
+        <p className="text-[22px] text-primary font-extrabold">
+          {cartProduct.priceDiscount
+            ? `$${cartProduct.priceDiscount}`
+            : `$${cartProduct.priceRegular}`}
+        </p>
       </div>
     </div>
   );
