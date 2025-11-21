@@ -24,8 +24,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             className="h-full w-full object-contain"
           />
         </div>
-        <div className="mb-4 flex-grow">
-          <h3 className="text-[14px] text-primary font-normal mb-2 min-h-[40px] line-clamp-2">
+        <div className="mb-4 grow">
+          <h3 className="text-[14px] text-primary font-normal mb-2 min-h-10 line-clamp-2">
             {product.name}
           </h3>
           <div className="flex items-center gap-3">
@@ -58,7 +58,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         <div className="flex items-center gap-4 justify-between mt-auto">
-          <div className="flex-grow">
+          <div className="grow">
             <PrimaryButton
               buttonText={selectedPrimary ? 'Added' : 'Add to cart'}
               selected={selectedPrimary}
