@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { HomeIcon } from "../../atoms/Icons/HomeIcon";
 import { ArrowRightIcon } from "../../atoms/Icons/ArrowRightIcon";
 import { ArrowLeftIcon } from "../../atoms/Icons/ArrowLeftIcon";
-import type { CategoryProduct } from "../../../types/CategoryProduct";
+import type { CategoryProduct, SimpleProduct } from "../../../types/CategoryProduct";
 import { ProductSlider } from "../../organisms/Sliders/ProductSlider";
 import { PrimaryButton } from "../../atoms/PrimaryButton/PrimaryButtom";
 import { ColorButton, FavoriteButton, PageButton } from "../../atoms/UtilityButton";
@@ -10,12 +10,21 @@ import { ColorButton, FavoriteButton, PageButton } from "../../atoms/UtilityButt
 type ItemCardProps = {
     itemProduct: CategoryProduct;
     productList: CategoryProduct[];
+    productsForSlider: SimpleProduct[];
 }
 
-export const ItemCard: React.FC<ItemCardProps> = ({ itemProduct, productList }) => {
+export const ItemCard: React.FC<ItemCardProps> = ({ itemProduct, productList, productsForSlider }) => {
+    if (!itemProduct) {
+        return
+    }
+    
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [selectedPrimary, setSelectedPrimary] = useState(false);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [selectedFavorite, setSelectedFavorite] = useState(false);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [currentProduct, setCurrentProduct] = useState(itemProduct);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [mainImage, setMainImage] = useState(itemProduct.images[0]);
     
     
@@ -43,13 +52,16 @@ export const ItemCard: React.FC<ItemCardProps> = ({ itemProduct, productList }) 
         }
     }
 
-    const availableColor = currentProduct.colorsAvailable;
+    let availableColor: string[] = []; 
+    
+    if (currentProduct.colorsAvailable) {
+        availableColor = [ ...currentProduct.colorsAvailable ];
+    }
+
 
     return (
         <div className="min-h-screen flex flex-col">
                         
-            <main className="container w-auto md:max-w-[758px] lg:max-w-[1200px] mx-auto px-4 pt-6 md:px-8">
-                
                 <div className="flex items-center gap-2 overflow-hidden sm:mb-6 md:mb-10">
                     <HomeIcon className="shrink-0" />
                     <ArrowRightIcon className="shrink-0" />
@@ -261,11 +273,9 @@ export const ItemCard: React.FC<ItemCardProps> = ({ itemProduct, productList }) 
                 </div>
                 
                 <div className="mb-12 lg:mb-16">
-                    <ProductSlider products={productList} title='You may also like' />
+                    <ProductSlider products={productsForSlider} title='You may also like' />
                 </div>
             
-            </main>
-
         </div>
     );
 };
