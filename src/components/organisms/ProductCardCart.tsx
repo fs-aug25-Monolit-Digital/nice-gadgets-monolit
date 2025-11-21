@@ -1,14 +1,15 @@
-import type React from "react";
-import { useState } from "react";
-import { CloseIcon } from "../atoms/Icons/CloseIcon";
-import type { CategoryProduct } from "../../types/CategoryProduct";
-import { MinusButton, PlusButton } from "../atoms/UtilityButton";
+import { useState } from 'react';
+import { CloseIcon } from '../atoms/Icons/CloseIcon';
+import type { SimpleProduct } from '../../types/CategoryProduct';
+import { MinusButton, PlusButton } from '../atoms/UtilityButton';
 
 type ProductCardCartProps = {
-  cartProduct: CategoryProduct;
+  cartProduct: SimpleProduct;
 };
 
-export const ProductCardCart: React.FC<ProductCardCartProps> = ({ cartProduct }) => {
+export const ProductCardCart: React.FC<ProductCardCartProps> = ({
+  cartProduct,
+}) => {
   const [count, setCount] = useState(1);
 
   return (
@@ -18,30 +19,35 @@ export const ProductCardCart: React.FC<ProductCardCartProps> = ({ cartProduct })
           <CloseIcon />
           <div className="h-[66px] flex items-center justify-center m-[7px]">
             <img
-              src={cartProduct.images[0]}
+              src={`${import.meta.env.BASE_URL}${cartProduct.image}`}
               alt={cartProduct.name}
               className="min-w-full h-full object-contain px-[7px]"
             />
           </div>
         </div>
-          <h3 className="text-[14px] text-primary font-normal break-words md:pr-4">{cartProduct.name}</h3>
+
+        <h3 className="text-[14px] text-primary font-normal break-words md:pr-4">
+          {cartProduct.name}
+        </h3>
       </div>
+
       <div className="flex justify-between items-center mt-4 md:mt-0 md:gap-x-10">
         <div className="flex items-center">
           <PlusButton
             className="w-[32px] h-[32px]"
             onClick={() => setCount((prev) => prev + 1)}
           />
-          <span className="text-[14px] text-black font-normal mx-[13px] text-center">{count}</span>
+          <span className="text-[14px] text-black font-normal mx-[13px] text-center">
+            {count}
+          </span>
           <MinusButton
             className="w-[32px] h-[32px]"
-            onClick={() => setCount((previous) => previous - 1)}
+            onClick={() => setCount((prev) => Math.max(1, prev - 1))}
           />
         </div>
+
         <p className="text-[22px] text-primary font-extrabold">
-          {cartProduct.priceDiscount
-            ? `$${cartProduct.priceDiscount}`
-            : `$${cartProduct.priceRegular}`}
+          ${cartProduct.price}
         </p>
       </div>
     </div>
