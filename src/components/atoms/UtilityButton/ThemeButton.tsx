@@ -28,7 +28,7 @@ const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 };
 
   return (
-    <label className="relative w-[63px] h-[63px] flex justify-center items-center border 
+    <label className="relative w-[47px] h-[47px] lg:w-[63px] lg:h-[63px] flex justify-center items-center border 
     border-element dark:border-element cursor-pointer hover:border-primary 
     dark:hover:border-primary transition-colors duration-300 rounded-none">
         <input 
@@ -37,10 +37,10 @@ const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             checked={dark}
             onChange={handleThemeChange}
             aria-label='Toggle theme'
-        />
+            />
 
   <svg
-    className={`w-5 h-5 fill-current transition-all duration-300 ${
+    className={`w-4 h-4 lg:w-5 lg:h-5 fill-current transition-all duration-300 ${
       dark ? 'opacity-0 rotate-45 scale-75' : 'opacity-100 rotate-0 scale-100'
     }`}
     xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   </svg>
 
   <svg
-    className={`absolute w-5 h-5 fill-current text-blue-400 transition-all duration-300 ${
+    className={`absolute w-4 h-4 lg:w-5 lg:h-5 fill-current text-blue-100 transition-all duration-300 ${
       dark ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-45 scale-75'
     }`}
     xmlns="http://www.w3.org/2000/svg"

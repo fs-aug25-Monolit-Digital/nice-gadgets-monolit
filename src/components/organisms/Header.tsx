@@ -33,7 +33,7 @@ export const Header: React.FC = () => {
           <ThemeButton />
           <HeaderActions />
           <MenuButton
-            className="md:hidden h-full w-12 lg:w-16"
+            className="md:hidden h-full w-12 lg:w-16 transition-colors duration-300"
             onClick={() => setIsMenuOpen(true)}
           />
         </div>
