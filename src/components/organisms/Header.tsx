@@ -4,6 +4,7 @@ import { HeaderActions } from '../molecules/HeaderActions/HeaderActions.tsx';
 import { Navbar } from '../molecules/HeaderActions/Navbar';
 import { MobileMenu } from '../organisms/MobileMenu';
 import { Logo } from '../atoms/Logo/Logo.tsx';
+import { ThemeButton } from '../atoms/UtilityButton/ThemeButton.tsx';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +22,7 @@ export const Header: React.FC = () => {
   }, [isMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 pl-4 w-full bg-white h-12 lg:h-16 border-b border-element z-50">
+    <header className="fixed top-0 left-0 pl-4 w-full bg-white h-12 lg:h-16 border-b transition-colors duration-300 border-element z-50">
       <div className="flex items-center justify-between h-full lg:pl-6 pr-0">
         <div className="flex items-center h-full">
           <Logo className="w-16 h-5 md:h-[22px] lg:w-20 lg:h-7"/>
@@ -29,6 +30,7 @@ export const Header: React.FC = () => {
         </div>
 
         <div className="flex items-center h-full">
+          <ThemeButton />
           <HeaderActions />
           <MenuButton
             className="md:hidden h-full w-12 lg:w-16"
