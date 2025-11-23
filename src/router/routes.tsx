@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { HomePage } from '../components/pages/HomePage';
 import { PhonesPage } from '../components/pages/PhonesPage';
 import { TabletsPage } from '../components/pages/TabletsPage';
@@ -23,5 +23,6 @@ export const AppRoutes = () => (
       <Route path="/cart" element={<CartPage />} />
     </Route>
     <Route path="*" element={<NotFoundPage />} />
+    <Route path="/home" element={<Navigate to="/" replace />} />
 </Routes>
 );

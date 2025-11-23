@@ -35,6 +35,7 @@ export const ProductSlider: React.FC<Props> = ({ products, title }) => {
   const handleSlideChange = (s: SwiperClass) => {
     setHasPrev(!s.isBeginning);
     setHasNext(!s.isEnd);
+    console.log(s.isEnd)
   };
 
   return (
@@ -50,7 +51,7 @@ export const ProductSlider: React.FC<Props> = ({ products, title }) => {
           slot="container-start"
           className="mb-6 flex justify-between"
         >
-          <h2 className="h2">{title}</h2>
+          <h2 className="h2 w-[136px] leading-[140%] md:w-auto">{title}</h2>
           <div
             slot="container-start"
             className=""
