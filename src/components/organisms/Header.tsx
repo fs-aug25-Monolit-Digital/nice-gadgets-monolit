@@ -9,7 +9,6 @@ import { SearchInput } from '../molecules/SearchInput/SearchInput';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState('Home');
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';
@@ -46,8 +45,6 @@ export const Header: React.FC = () => {
       <MobileMenu
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
-        activeItem={activeItem}
-        setActiveItem={setActiveItem}
       />
     </header>
   );
