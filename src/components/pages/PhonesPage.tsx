@@ -4,7 +4,7 @@ import { getProducts } from '../../utilities/fetchApi';
 import { ProductsPageTemplate } from '../templates/ProductsPageTemplate/ProductsPageTemplate';
 
 export const PhonesPage: React.FC = () => {
-  const { data: products } = useProducts(getProducts);
+  const { data: products, isLoading } = useProducts(getProducts);
 
   const phones = useMemo(() => {
   return products.filter(p => p.category === 'phones');
@@ -12,6 +12,7 @@ export const PhonesPage: React.FC = () => {
 
   return (
     <ProductsPageTemplate
+      isLoading={isLoading}
       title={'Mobile phones'}
       products={phones}
       totalProducts={phones.length}

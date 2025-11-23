@@ -4,7 +4,7 @@ import { getProducts } from "../../utilities/fetchApi";
 import { ProductsPageTemplate } from "../templates/ProductsPageTemplate/ProductsPageTemplate";
 
 export const AccessoriesPage = () => {
-  const { data: products } = useProducts(getProducts);
+  const { data: products, isLoading } = useProducts(getProducts);
 
   const accessories = useMemo(() => {
   return products.filter(p => p.category === 'accessories');
@@ -12,6 +12,7 @@ export const AccessoriesPage = () => {
 
   return (
     <ProductsPageTemplate
+      isLoading={isLoading}
       title={'Accessories'}
       products={accessories}
       totalProducts={accessories.length}
