@@ -1,8 +1,9 @@
 import type React from "react";
-import { useState } from "react";
 import { PrimaryButton } from "../atoms/PrimaryButton/PrimaryButtom";
 import { FavoriteButton } from "../atoms/UtilityButton";
 import type { SimpleProduct } from "../../types/CategoryProduct";
+import { useFavouritesStore } from "../../stores/useFavouritesStore";
+import { useCartStore } from "../../stores/useCartStore";
 
 type ProductCardProps = {
     product: SimpleProduct;
@@ -13,9 +14,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     product,
     className,
 }) => {
-    
-    const [selectedPrimary, setSelectedPrimary] = useState(false);
-    const [selectedFavorite, setSelectedFavorite] = useState(false);
+    const { cart, addToCart } = useCartStore();
+    const isAdded = cart.some((item) => item.id === product.id);
+
+    const { favourites, toggleFavourite } = useFavouritesStore();
+
+    const isFavorite = favourites.some((item) => item.id === product.id);
+
+    const handleAddToCart = () => {
+        if (!isAdded) {
+            addToCart(product);
+        }
+    };
 
     return (
       <div className={
@@ -65,9 +75,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <div className="flex items-center gap-4 justify-between mt-auto">
           <div className="grow">
             <PrimaryButton
-              buttonText={selectedPrimary ? 'Added' : 'Add to cart'}
-              selected={selectedPrimary}
-              onClick={() => setSelectedPrimary((prev) => !prev)}
+              buttonText={isAdded ? 'Added' : 'Add to cart'}
+              selected={isAdded} 
+              onClick={handleAddToCart}
               className="lg:w-40"
             />
           </div>
@@ -75,8 +85,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <div>
             <FavoriteButton
               className="w-10 h-10 flex items-center justify-center border border-element rounded-full hover:bg-gray-50 transition-colors"
-              selected={selectedFavorite}
-              onClick={() => setSelectedFavorite((prev) => !prev)}
+              selected={isFavorite}
+              onClick={() => toggleFavourite(product)}
             />
           </div>
         </div>

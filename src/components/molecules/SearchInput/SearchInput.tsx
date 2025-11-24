@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SearchIcon } from '../../atoms/Icons/SearchIcon';
 
 interface SearchProps {
@@ -8,6 +8,53 @@ interface SearchProps {
 
 export const SearchInput: React.FC<SearchProps> = ({ onSearch, className = '' }) => {
   const [query, setQuery] = useState('');
+  
+  const [placeholder, setPlaceholder] = useState('');
+
+  const phrases = [
+    "iPhone 11", 
+    "iPhone 14 Pro",
+    "iPad Pro",
+    "iPad Air",
+    "iPad Mini",
+    "Apple Watch"
+  ];
+
+  useEffect(() => {
+    let currentPhraseIndex = 0;
+    let currentCharIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+
+    const type = () => {
+      const currentPhrase = phrases[currentPhraseIndex];
+
+      if (isDeleting) {
+        setPlaceholder(currentPhrase.substring(0, currentCharIndex - 1));
+        currentCharIndex--;
+        typingSpeed = 50;
+      } else {
+        setPlaceholder(currentPhrase.substring(0, currentCharIndex + 1));
+        currentCharIndex++;
+        typingSpeed = 150;
+      }
+
+      if (!isDeleting && currentCharIndex === currentPhrase.length) {
+        isDeleting = true;
+        typingSpeed = 2000;
+      } else if (isDeleting && currentCharIndex === 0) {
+        isDeleting = false;
+        currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+        typingSpeed = 500;
+      }
+
+      setTimeout(type, typingSpeed);
+    };
+
+    const timerId = setTimeout(type, 1000);
+    return () => clearTimeout(timerId);
+  }, []);
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +73,7 @@ export const SearchInput: React.FC<SearchProps> = ({ onSearch, className = '' })
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search for..."
+          placeholder={`Search for ${placeholder}|`}
           className="
             w-full h-12 pl-4 pr-12 
             text-primary placeholder-secondary
