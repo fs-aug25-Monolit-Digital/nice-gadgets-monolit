@@ -39,6 +39,14 @@
   --shadow-custom: 0px 3px 13px 0px #17203166;
 }
 
+@utility shadow-accent-green {
+  box-shadow: 0 0 0 2px var(--color-accent-green);
+}
+
+@utility shadow-accent-red {
+  box-shadow: 0 0 0 2px var(--color-accent-red);
+}
+
 @layer components {
   .h1 {
     @apply text-primary font-extrabold leading-[41px] md:leading-14 text-[32px] md:text-[48px] tracking-[-1%];

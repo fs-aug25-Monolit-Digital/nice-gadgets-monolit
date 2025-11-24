@@ -2,14 +2,19 @@ import { useMemo } from "react";
 import { useProducts } from "../../hooks/useProduct";
 import { getProducts } from "../../utilities/fetchApi";
 import { ProductsPageTemplate } from "../templates/ProductsPageTemplate/ProductsPageTemplate";
+import { ErrorComponent } from "../organisms/ErrorComponent";
 
 export const AccessoriesPage = () => {
-  const { data: products, isLoading } = useProducts(getProducts);
+  const { data: products, isLoading, hasError } = useProducts(getProducts);
 
   const accessories = useMemo(() => {
   return products.filter(p => p.category === 'accessories');
 }, [products]);
 
+  if (hasError) {
+    return <ErrorComponent />
+  }
+  
   return (
     <ProductsPageTemplate
       isLoading={isLoading}

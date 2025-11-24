@@ -10,7 +10,7 @@ type Props = {
   message: string;
   isOpen: boolean;
   onClose: (value: boolean) => void;
-  notificationType: 'error' | 'notification';
+  notificationType: 'error' | 'info' | 'success';
 };
 
 export const NotificationToast: React.FC<Props> = ({
@@ -44,13 +44,19 @@ export const NotificationToast: React.FC<Props> = ({
         open={true}
         onOpenChange={() => {}}
         className={cn(
-          `ToastRoot fixed opacity-0 transition-all duration-300 ease-linear bottom-[10%] right-[50%] translate-x-[50%] 
-          md:right-[5%] md:translate-x-0 flex items-center gap-4 p-4 bg-white shadow-custom
-          border border-element rounded-2xl
-            'data-[state=open]:animate-toast-in-right',
-            'data-[state=closed]:animate-toast-out-right' ${className}`,
+          `ToastRoot fixed opacity-0 transition-all duration-300 ease-linear
+            bottom-6 md:bottom-10 right-4 translate-x-0
+            md:right-[5%] md:translate-x-0
+            flex items-center gap-4 p-4 bg-white
+            border border-element rounded-2xl
+            data-[state=open]:animate-toast-in-right
+            data-[state=closed]:animate-toast-out-right`,
+            className,
           {
-            'shadow-accent-red': notificationType === 'error',
+            'shadow-accent-red border-accent-red': notificationType === 'error',
+            'shadow-accent-green border-accent-green': notificationType === 'success',
+            'shadow-custom': notificationType === 'info',
+
             'show': !isClosing,
             'hide': isClosing,
           },
@@ -63,13 +69,15 @@ export const NotificationToast: React.FC<Props> = ({
           <Toast.Description
             className={cn('text-center body-text', {
               'text-accent-red': notificationType === 'error',
+              'text-accent-green': notificationType === 'success',
+              'text-primary': notificationType === 'info',
             })}
           >
             {message}
           </Toast.Description>
         </div>
         <Toast.Close
-          className=""
+          className="top-2 right-2"
           onClick={() => onClose(false)}
         >
           <CloseButton className="w-8 h-8" />
