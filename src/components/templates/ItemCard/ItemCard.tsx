@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
-import cn from 'classnames';
+import { useNavigate } from 'react-router-dom';
 
-// Icons & Components
 import { HomeIcon } from '../../atoms/Icons/HomeIcon';
 import { ArrowRightIcon } from '../../atoms/Icons/ArrowRightIcon';
 import { ProductSlider } from '../../organisms/Sliders/ProductSlider';
@@ -24,7 +22,7 @@ import type {
 } from '../../../types/CategoryProduct';
 
 type ItemCardProps = {
-  itemProduct: CategoryProduct | undefined; 
+  itemProduct: CategoryProduct | undefined;
   productList: CategoryProduct[];
   productsForSlider: SimpleProduct[];
   isLoading: boolean;
@@ -37,7 +35,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   isLoading,
 }) => {
   const navigate = useNavigate();
-  
+
   const [mainImage, setMainImage] = useState<string>('');
 
   // --- ZUSTAND HOOKS ---
@@ -48,7 +46,8 @@ export const ItemCard: React.FC<ItemCardProps> = ({
     if (itemProduct) {
       setMainImage(itemProduct.images?.[0] || '');
     }
-  }, [itemProduct]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [itemProduct?.id]);
 
   if (isLoading) {
     return (
@@ -57,9 +56,9 @@ export const ItemCard: React.FC<ItemCardProps> = ({
       </div>
     );
   }
-  
+
   if (!itemProduct) {
-    return null; 
+    return null;
   }
 
   const isAddedToCart = cart.some((item) => item.id === itemProduct.id);
@@ -68,7 +67,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   const createSimpleProduct = (): SimpleProduct => ({
     id: itemProduct.id,
     category: itemProduct.category,
-    itemId: itemProduct.id, 
+    itemId: itemProduct.id,
     name: itemProduct.name,
     fullPrice: itemProduct.priceRegular,
     price: itemProduct.priceDiscount || itemProduct.priceRegular,
@@ -98,14 +97,16 @@ export const ItemCard: React.FC<ItemCardProps> = ({
       (p) =>
         p.namespaceId === itemProduct.namespaceId &&
         p.capacity === itemProduct.capacity &&
-        p.color === color
+        p.color === color,
     );
-    
+
     if (!match) {
       const fallbackMatch = productList.find(
-        (p) => p.namespaceId === itemProduct.namespaceId && p.color === color
+        (p) => p.namespaceId === itemProduct.namespaceId && p.color === color,
       );
-      return fallbackMatch ? `/${fallbackMatch.category}/${fallbackMatch.id}` : null;
+      return fallbackMatch
+        ? `/${fallbackMatch.category}/${fallbackMatch.id}`
+        : null;
     }
 
     return match ? `/${match.category}/${match.id}` : null;
@@ -116,7 +117,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
       (p) =>
         p.namespaceId === itemProduct.namespaceId &&
         p.color === itemProduct.color &&
-        p.capacity === capacity
+        p.capacity === capacity,
     );
     return match ? `/${match.category}/${match.id}` : null;
   };
@@ -167,7 +168,9 @@ export const ItemCard: React.FC<ItemCardProps> = ({
                 src={img}
                 alt={itemProduct.name}
                 className={`h-14 w-14 object-contain cursor-pointer border md:h-16 md:w-16 lg:h-20 lg:w-20 transition-transform duration-300 border-element hover:border-secondary active:border-primary p-2 rounded-none ${
-                  mainImage === img ? 'scale-110 border-primary' : 'hover:scale-110'
+                  mainImage === img
+                    ? 'scale-110 border-primary'
+                    : 'hover:scale-110'
                 }`}
                 onClick={() => setMainImage(img)}
               />
@@ -267,17 +270,26 @@ export const ItemCard: React.FC<ItemCardProps> = ({
         <div className="w-auto lg:w-[48%]">
           <h3 className="text-2xl font-extrabold mb-4 text-primary">About</h3>
           {itemProduct.description.map((desc, i) => (
-             <div key={i} className={`mb-8 ${i === 0 ? 'border-t border-element pt-6' : ''}`}>
-               <h4 className="font-bold text-[16px] lg:text-xl mb-4 text-primary">{desc.title}</h4>
-               <div className="text-secondary font-medium text-[14px] space-y-2">
-                 {desc.text.map((paragraph, j) => <p key={j}>{paragraph}</p>)}
-               </div>
-             </div>
+            <div
+              key={i}
+              className={`mb-8 ${i === 0 ? 'border-t border-element pt-6' : ''}`}
+            >
+              <h4 className="font-bold text-[16px] lg:text-xl mb-4 text-primary">
+                {desc.title}
+              </h4>
+              <div className="text-secondary font-medium text-[14px] space-y-2">
+                {desc.text.map((paragraph, j) => (
+                  <p key={j}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
 
         <div className="w-auto lg:w-[48%] mb-12 lg:mb-14">
-          <h3 className="text-2xl font-extrabold mb-4 text-primary">Tech specs</h3>
+          <h3 className="text-2xl font-extrabold mb-4 text-primary">
+            Tech specs
+          </h3>
           <div className="border-t border-element text-[14px] text-right space-y-2 pt-2">
             <div className="flex justify-between mt-6">
               <span className="text-secondary">Screen</span>

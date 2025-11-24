@@ -53,15 +53,16 @@ export const SearchInput: React.FC<SearchProps> = ({ onSearch, className = '' })
 
     const timerId = setTimeout(type, 1000);
     return () => clearTimeout(timerId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
-  const handleSubmit = (e: React.FormEvent) => {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (query.trim()) {
       onSearch(query);
     }
-  };
+  }
 
   return (
     <form
