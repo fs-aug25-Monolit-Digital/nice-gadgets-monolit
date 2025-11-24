@@ -46,12 +46,12 @@ export const Pagination: React.FC<PaginationProps> = ({
         className="w-8 h-8 bg-white-2 hover:bg-white-2"
       />
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 transition-all duration-300 ease-in-out">
         {buttons.map((page) => {
 
           return (
             <PageButton
-              className="w-8 h-8"
+              className="w-8 h-8 transition-all duration-300 ease-in-out"
               key={page}
               page={page}
               selected={page === currentPage}
