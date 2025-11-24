@@ -10,7 +10,6 @@ export function useCurrentProduct(categoryProducts: CategoryProduct[]) {
     return categoryProducts.find((p) => p?.id === productSlug);
   }, [productSlug, categoryProducts]);
 
-  // Скролл наверх при смене slug
   useEffect(() => {
     if (productSlug) {
       window.scrollTo({ top: 64, behavior: 'smooth' });
