@@ -8,7 +8,6 @@ export type CategoryFilters = {
   sort: SortOption;
   perPage: number;
   currentPage: number;
-  search: string;
 };
 
 type ProductsControlsState = {
@@ -17,7 +16,6 @@ type ProductsControlsState = {
   setSort: (category: CategoryKey, value: SortOption) => void;
   setPerPage: (category: CategoryKey, value: number) => void;
   setCurrentPage: (category: CategoryKey, value: number) => void;
-  setSearch: (category: CategoryKey, value: string) => void;
 
   getCategory: (category: CategoryKey) => CategoryFilters;
 }
@@ -26,16 +24,15 @@ const initialCategoryState: CategoryFilters = {
   sort: 'Newest',
   perPage: 16,
   currentPage: 1,
-  search: '',
 };
 
 export const useProductsControls = create<ProductsControlsState>()(
   persist(
     (set, get) => ({
       categories: {
-        phones: initialCategoryState,
-        tablets: initialCategoryState,
-        accessories: initialCategoryState,
+        phones: { ...initialCategoryState },
+        tablets: { ...initialCategoryState },
+        accessories: { ...initialCategoryState },
       },
 
       setSort: (category, value) =>
@@ -71,19 +68,6 @@ export const useProductsControls = create<ProductsControlsState>()(
             },
           },
         })),
-
-      setSearch: (category, value) =>
-        set(state => ({
-          categories: {
-            ...state.categories,
-            [category]: {
-              ...state.categories[category],
-              search: value,
-              currentPage: 1,
-            },
-          },
-        })),
-
       getCategory: (category) => get().categories[category],
     }),
     {

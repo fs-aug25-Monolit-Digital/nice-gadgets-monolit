@@ -8,16 +8,10 @@ export const useFilteredProducts = (
 ) => {
   const { getCategory } = useProductsControls();
 
-  const { sort, perPage, currentPage, search } = getCategory(category);
+  const { sort, perPage, currentPage } = getCategory(category);
 
   const filteredProducts = useMemo(() => {
-    let result = [...products];
-
-    if (search) {
-      result = result.filter(p =>
-        p.name.toLowerCase().includes(search.toLowerCase())
-      );
-    }
+    const result = [...products];
 
     switch (sort) {
       case 'Cheapest':
@@ -38,7 +32,7 @@ export const useFilteredProducts = (
     }
 
     return result;
-  }, [products, sort, search]);
+  }, [products, sort]);
 
   
   const paginatedProducts = useMemo(() => {
