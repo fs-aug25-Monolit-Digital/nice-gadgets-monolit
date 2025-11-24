@@ -29,10 +29,10 @@ export const Header: React.FC = () => {
         </div>
 
         <div className="flex items-center h-full">
-          <ThemeButton />
           <div className="flex lg:hidden items-center">
              <SearchButtonWithInput className="w-[48px] h-[48px]" />
           </div>
+            <ThemeButton />
           
           <HeaderActions />
           
