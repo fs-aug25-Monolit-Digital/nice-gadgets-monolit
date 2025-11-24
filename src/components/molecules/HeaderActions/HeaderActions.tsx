@@ -18,7 +18,7 @@ export const HeaderActions: React.FC = () => {
         {
           favouritesCount > 0 ? (
             <FavoriteButtonWithBadge
-              className="w-12 lg:w-16 h-full"
+              className="w-12 lg:w-16 h-full transition-colors duration-300"
               count={favouritesCount}
             />
           ) : (
@@ -36,7 +36,7 @@ export const HeaderActions: React.FC = () => {
         {
           cartCount > 0 ? (
             <ShoppingBagWithBadgeButton
-              className="w-12 lg:w-16 h-full"
+              className="w-12 lg:w-16 h-full transition-colors duration-300"
               countBag={cartCount}
             />
           ) : (
