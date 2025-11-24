@@ -28,7 +28,7 @@ export const PhonesPage: React.FC = () => {
           onPageChange={() => {}}
         />
       : <ItemCard
-            isLoading={isLoading}
+          isLoading={isLoading}
           itemProduct={currentProduct}
           productList={categoryProducts}
           productsForSlider={products}

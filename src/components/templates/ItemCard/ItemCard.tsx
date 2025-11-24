@@ -26,35 +26,33 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   itemProduct,
   productList,
   productsForSlider,
-  isLoading
+  isLoading,
 }) => {
-    if (isLoading) {
-      return (
-        <div className="min-h-screen flex items-center justify-center">
-          <MainLoader />
-        </div>
-      );
-    }
-  if (!itemProduct) {
-    return null;
-  }
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [selectedPrimary, setSelectedPrimary] = useState(false);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [selectedFavorite, setSelectedFavorite] = useState(false);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [currentProduct, setCurrentProduct] = useState(itemProduct);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [mainImage, setMainImage] = useState(itemProduct.images[0]);
+  const [mainImage, setMainImage] = useState(itemProduct?.images[0]);
 
   useEffect(() => {
-
     if (itemProduct) {
-      setCurrentProduct(itemProduct);
-      setMainImage((itemProduct.images && itemProduct.images[0]) ?? '');
+      Promise.resolve().then(() => {
+        setCurrentProduct(itemProduct);
+        setMainImage(itemProduct.images?.[0] ?? '');
+      });
     }
   }, [itemProduct]);
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <MainLoader />
+      </div>
+    );
+  }
+  if (!itemProduct || !currentProduct) {
+    return null;
+  }
+  
   const handleCapacityChange = (capacity: string) => {
     const foundCapacity = productList.find(
       (list) =>
