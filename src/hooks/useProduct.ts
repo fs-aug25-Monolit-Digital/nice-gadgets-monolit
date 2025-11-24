@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   ProductsServiceErrors,
   productsServiceErrorText,
-} from '../types/enumErrorText';
+} from '../types/errorText';
 
 export const useProducts = <T>(fetcher: () => Promise<T[]>) => {
   const [data, setData] = useState<T[]>([]);
