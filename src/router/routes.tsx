@@ -21,7 +21,7 @@ export const AppRoutes = () => (
       <Route path="/accessories" element={<AccessoriesPage />} />
       <Route path="/favourites" element={<FavouritePage />} />
       <Route path="/cart" element={<CartPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Route>
-    <Route path="*" element={<NotFoundPage />} />
 </Routes>
 );

@@ -1,6 +1,6 @@
 export const ErrorComponent = () => {
   return (
-    <div className="min-h-[calc(100vh-64px)] flex flex-col items-center pt-20">
+    <div className="flex flex-col items-center justify-center flex-1 py-20">
       <img
         src={`${import.meta.env.BASE_URL}gadgets/img/product-not-found.png`}
         alt="Service unavailable"
