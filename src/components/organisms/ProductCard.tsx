@@ -94,7 +94,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className="flex items-center gap-4 justify-between mt-auto ">
         <div className="grow">
           <PrimaryButton
-            buttonText={isAdded ? "Added" : "Add to cart"}
+            buttonText={isAdded ? "Added to cart" : "Add to cart"}
             selected={isAdded}
             onClick={handleAddToCart}
             className="lg:w-40"

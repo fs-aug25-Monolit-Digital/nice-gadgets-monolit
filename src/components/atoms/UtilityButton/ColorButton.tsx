@@ -11,7 +11,7 @@ interface ColorButtonProps {
 }
 
 const colorMap: Record<string, string> = {
-  // Базові
+  // Base colors
   black: '#1F2020',
   white: '#F9F6EF',
   red: '#BA0C2E',
@@ -22,7 +22,7 @@ const colorMap: Record<string, string> = {
   pink: '#FAE0D8',
   coral: '#FF7F50',
   
-  // Специфічні для Apple
+  // Apple specific colors
   spacegray: '#535150',
   'space gray': '#535150',
   'space-gray': '#535150',

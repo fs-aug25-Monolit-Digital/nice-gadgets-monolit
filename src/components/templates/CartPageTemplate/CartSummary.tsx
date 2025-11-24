@@ -34,10 +34,6 @@ export const CartSummary: React.FC<CartSummaryProps> = ({ cartProducts }) => {
         selected={selectedCheckoutButton}
         onClick={() => {
             setSelectedCheckoutButton(true);
-            setTimeout(() => {
-                alert('Checkout feature implies implementing a checkout form. Good job!');
-                setSelectedCheckoutButton(false);
-            }, 500)
         }}
       />
     </div>

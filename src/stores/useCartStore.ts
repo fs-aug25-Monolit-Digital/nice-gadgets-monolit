@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 import type { SimpleProduct } from '../types/CategoryProduct';
 
 export interface CartItem extends SimpleProduct {
@@ -9,7 +9,6 @@ export interface CartItem extends SimpleProduct {
 interface CartState {
   cart: CartItem[];
   addToCart: (product: SimpleProduct) => void;
-  // ID може бути рядком або числом
   removeFromCart: (productId: number | string) => void;
   increaseQuantity: (productId: number | string) => void;
   decreaseQuantity: (productId: number | string) => void;
@@ -23,7 +22,6 @@ export const useCartStore = create<CartState>()(
 
       addToCart: (product) => {
         const { cart } = get();
-        // Порівняння працюватиме коректно для string id
         const existingItem = cart.find((item) => item.id === product.id);
 
         if (existingItem) {
@@ -66,7 +64,6 @@ export const useCartStore = create<CartState>()(
     }),
     {
       name: 'cart-storage',
-      storage: createJSONStorage(() => localStorage),
     }
   )
 );
