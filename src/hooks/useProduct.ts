@@ -1,13 +1,6 @@
 import { useEffect, useState } from 'react';
-<<<<<<< HEAD
-import {ProductsServiceErrors} from '../types/enumErrorText';
+import {ProductsServiceErrors} from '../types/errorText';
 import { notifyProductError } from '../utilities/notify';
-=======
-import {
-  ProductsServiceErrors,
-  productsServiceErrorText,
-} from '../types/errorText';
->>>>>>> e6d01f1bfe8c930c02cc34b73b4cd5d698601815
 
 export const useProducts = <T>(fetcher: () => Promise<T[]>) => {
   const [data, setData] = useState<T[]>([]);
