@@ -45,8 +45,6 @@
   --shadow-custom: 0px 3px 13px 5px #17203166;
 }
 
-
-
 html.dark {
   --color-primary: #ffffff;
   --color-primary-2: #323542;
@@ -65,14 +63,6 @@ html.dark {
   --color-accent-red: #eb5757;
   
   --shadow-custom: 0px 3px 13px 5px #17203166;
-}
-
-@utility shadow-accent-green {
-  box-shadow: 0 0 0 2px var(--color-accent-green);
-}
-
-@utility shadow-accent-red {
-  box-shadow: 0 0 0 2px var(--color-accent-red);
 }
 
 @layer components {
@@ -119,4 +109,12 @@ body {
 
 @utility animate-underline {
   animation: underline-slide 300ms ease-out forwards;
+}
+
+@utility shadow-accent-green {
+  box-shadow: 0 0 0 2px var(--color-accent-green);
+}
+
+@utility shadow-accent-red {
+  box-shadow: 0 0 0 2px var(--color-accent-red);
 }
