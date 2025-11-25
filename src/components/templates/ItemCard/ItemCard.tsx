@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useRef} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { HomeIcon } from '../../atoms/Icons/HomeIcon';
 import { ArrowRightIcon } from '../../atoms/Icons/ArrowRightIcon';
@@ -38,7 +38,6 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   isLoading,
 }) => {
   const navigate = useNavigate();
-
   const [mainImage, setMainImage] = useState<string>('');
   
   const swiperRef = useRef<SwiperType | null>(null); 
@@ -46,6 +45,9 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   // --- ZUSTAND HOOKS ---
   const { cart, addToCart, removeFromCart } = useCartStore();
   const { favourites, toggleFavourite } = useFavouritesStore();
+
+  const isAddedToCart = cart.some((item) => item.itemId === itemProduct?.id);
+  const isFavorite = favourites.some((item) => item.itemId === itemProduct?.id);
 
   useEffect(() => {
     if (itemProduct) {
@@ -66,9 +68,6 @@ export const ItemCard: React.FC<ItemCardProps> = ({
     return null;
   }
 
-  const isAddedToCart = cart.some((item) => item.itemId === itemProduct.id);
-  const isFavorite = favourites.some((item) => item.itemId === itemProduct.id);
-
   const createSimpleProduct = (): SimpleProduct => ({
     id: itemProduct.id,
     category: itemProduct.category,
@@ -88,8 +87,9 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   const handleCartClick = () => {
     if (isAddedToCart) {
       const itemInCart = cart.find((item) => item.itemId === itemProduct.id);
+      
       if (itemInCart) {
-        removeFromCart(itemInCart.id);
+        removeFromCart(itemInCart.itemId);
       }
     } else {
       addToCart(productToSave);
@@ -116,7 +116,6 @@ export const ItemCard: React.FC<ItemCardProps> = ({
         ? `/${fallbackMatch.category}/${fallbackMatch.id}`
         : null;
     }
-
     return match ? `/${match.category}/${match.id}` : null;
   };
 
@@ -255,12 +254,23 @@ export const ItemCard: React.FC<ItemCardProps> = ({
               </div>
 
               <div className="flex items-center gap-3 lg:gap-4">
-                <PrimaryButton
-                  buttonText={isAddedToCart ? 'Added to cart' : 'Add to cart'}
-                  selected={isAddedToCart}
-                  onClick={handleCartClick}
-                  className="flex-1 max-w-[263px] h-12"
-                />
+                {isAddedToCart ? (
+                  <Link to="/cart" className="flex-1 max-w-[263px] h-12">
+                    <PrimaryButton
+                      buttonText="Go to cart"
+                      selected={isAddedToCart}
+                      onClick={() => {}}
+                      className="flex-1 w-full max-w-[263px] h-12"
+                    />
+                  </Link>
+                ) : (
+                  <PrimaryButton
+                    buttonText="Add to cart"
+                    selected={isAddedToCart}
+                    onClick={handleCartClick}
+                    className="flex-1 w-full max-w-[263px] h-12"
+                  />
+                )}
                 <FavoriteButton
                   className="w-12 h-12"
                   selected={isFavorite}
@@ -316,6 +326,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
             Tech specs
           </h3>
           <div className="border-t border-element text-[14px] text-right space-y-2 pt-2">
+            {/* Tech specs list ... */}
             <div className="flex justify-between mt-6">
               <span className="text-secondary">Screen</span>
               <span className="text-primary">{itemProduct.screen}</span>

@@ -14,11 +14,11 @@ export const useFavouritesStore = create<FavouritesState>()(
 
       toggleFavourite: (product) =>
         set((state) => {
-          const isExists = state.favourites.some((p) => p.id === product.id);
+          const isExists = state.favourites.some((p) => p.itemId === product.itemId);
 
           if (isExists) {
             return {
-              favourites: state.favourites.filter((p) => p.id !== product.id),
+              favourites: state.favourites.filter((p) => p.itemId !== product.itemId),
             };
           }
 

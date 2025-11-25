@@ -6,7 +6,6 @@ import type { SimpleProduct } from "../../types/CategoryProduct";
 import { useFavouritesStore } from "../../stores/useFavouritesStore";
 import { useCartStore } from "../../stores/useCartStore";
 
-
 type ProductCardProps = {
   product: SimpleProduct;
   className?: string;
@@ -17,11 +16,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   className,
 }) => {
   const { cart, addToCart } = useCartStore();
-  const isAdded = cart.some((item) => item.id === product.id);
-
   const { favourites, toggleFavourite } = useFavouritesStore();
-  const isFavorite = favourites.some((item) => item.id === product.id);
 
+  const isAdded = cart.some((item) => item.itemId === product.itemId);
+  const isFavorite = favourites.some((item) => item.itemId === product.itemId);
+  
   const handleAddToCart = () => {
     if (!isAdded) {
       addToCart(product);
@@ -34,14 +33,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         ${className}`}
     >
       <div className="group">
-          <Link
+        <Link
           to={`/${product.category}/${product.itemId}`}
           className="h-[200px] flex items-center justify-center mb-6"
         >
           <img
             src={product.image}
             alt={product.name}
-            className="h-full w-full object-contain transition-all duration-300 ease-linear group-hover:scale-[1.1]"
+            className="h-full w-full text-primary object-contain transition-all duration-300 ease-linear group-hover:scale-[1.1]"
           />
         </Link>
 
@@ -92,12 +91,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
       <div className="flex items-center gap-4 justify-between mt-auto ">
         <div className="grow">
-          <PrimaryButton
-            buttonText={isAdded ? "Added to cart" : "Add to cart"}
-            selected={isAdded}
-            onClick={handleAddToCart}
-            className="lg:w-40"
-          />
+          {isAdded ? (
+            <Link to="/cart" className="flex-1 max-w-[263px] h-12">
+              <PrimaryButton
+                buttonText="Go to cart"
+                selected={isAdded}
+                onClick={() => {}}
+                className="flex-1 w-full max-w-[263px] h-12"
+              />
+            </Link>
+          ) : (
+            <PrimaryButton
+              buttonText="Add to cart"
+              selected={isAdded}
+              onClick={handleAddToCart}
+              className="flex-1 w-full max-w-[263px] h-12"
+            />
+          )}
         </div>
 
         <div>
