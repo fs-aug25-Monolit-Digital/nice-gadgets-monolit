@@ -9,9 +9,9 @@ export interface CartItem extends SimpleProduct {
 interface CartState {
   cart: CartItem[];
   addToCart: (product: SimpleProduct) => void;
-  removeFromCart: (productId: number | string) => void;
-  increaseQuantity: (productId: number | string) => void;
-  decreaseQuantity: (productId: number | string) => void;
+  removeFromCart: (itemId: number | string) => void;
+  increaseQuantity: (itemId: number | string) => void;
+  decreaseQuantity: (itemId: number | string) => void;
   clearCart: () => void;
 }
 
@@ -22,12 +22,12 @@ export const useCartStore = create<CartState>()(
 
       addToCart: (product) => {
         const { cart } = get();
-        const existingItem = cart.find((item) => item.id === product.id);
+        const existingItem = cart.find((item) => item.itemId === product.itemId);
 
         if (existingItem) {
           set({
             cart: cart.map((item) =>
-              item.id === product.id
+              item.itemId === product.itemId
                 ? { ...item, quantity: item.quantity + 1 }
                 : item
             ),
@@ -37,24 +37,24 @@ export const useCartStore = create<CartState>()(
         }
       },
 
-      removeFromCart: (productId) =>
+      removeFromCart: (itemId) =>
         set((state) => ({
-          cart: state.cart.filter((item) => item.id !== productId),
+          cart: state.cart.filter((item) => item.itemId !== itemId),
         })),
 
-      increaseQuantity: (productId) =>
+      increaseQuantity: (itemId) =>
         set((state) => ({
           cart: state.cart.map((item) =>
-            item.id === productId
+            item.itemId === itemId
               ? { ...item, quantity: item.quantity + 1 }
               : item
           ),
         })),
 
-      decreaseQuantity: (productId) =>
+      decreaseQuantity: (itemId) =>
         set((state) => ({
           cart: state.cart.map((item) =>
-            item.id === productId && item.quantity > 1
+            item.itemId === itemId && item.quantity > 1
               ? { ...item, quantity: item.quantity - 1 }
               : item
           ),

@@ -16,7 +16,7 @@ export const ProductCardCart: React.FC<ProductCardCartProps> = ({
       <div className="flex items-center justify-between gap-x-4 md:gap-x-6">
         <CloseButton
           className="border-0"
-          onClick={() => removeFromCart(cartProduct.id)}
+          onClick={() => removeFromCart(cartProduct.itemId)}
         />
         
         <div className="flex flex-row flex-1 shrink-0 gap-x-4 md:gap-x-6 group">
@@ -46,7 +46,7 @@ export const ProductCardCart: React.FC<ProductCardCartProps> = ({
           <MinusButton
             className="w-8 h-8"
             disabled={cartProduct.quantity <= 1}
-            onClick={() => decreaseQuantity(cartProduct.id)}
+            onClick={() => decreaseQuantity(cartProduct.itemId)}
           />
 
           <span className="text-[14px] text-primary font-normal mx-[13px] text-center w-4">
@@ -55,7 +55,7 @@ export const ProductCardCart: React.FC<ProductCardCartProps> = ({
 
           <PlusButton
             className="w-8 h-8"
-            onClick={() => increaseQuantity(cartProduct.id)}
+            onClick={() => increaseQuantity(cartProduct.itemId)}
           />
         </div>
 

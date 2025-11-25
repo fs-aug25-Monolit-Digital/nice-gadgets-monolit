@@ -35,12 +35,14 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   isLoading,
 }) => {
   const navigate = useNavigate();
-
   const [mainImage, setMainImage] = useState<string>('');
 
   // --- ZUSTAND HOOKS ---
   const { cart, addToCart, removeFromCart } = useCartStore();
   const { favourites, toggleFavourite } = useFavouritesStore();
+
+  const isAddedToCart = cart.some((item) => item.itemId === itemProduct?.id);
+  const isFavorite = favourites.some((item) => item.itemId === itemProduct?.id);
 
   useEffect(() => {
     if (itemProduct) {
@@ -48,6 +50,20 @@ export const ItemCard: React.FC<ItemCardProps> = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemProduct?.id]);
+
+  const [buttonText, setButtonText] = useState("Add to cart");
+
+  useEffect(() => {
+    if (isAddedToCart) {
+      setButtonText("Added to cart");
+      const timer = setTimeout(() => {
+        setButtonText("Go to cart");
+      }, 2000);
+      return () => clearTimeout(timer);
+    } else {
+      setButtonText("Add to cart");
+    }
+  }, [isAddedToCart]);
 
   if (isLoading) {
     return (
@@ -60,9 +76,6 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   if (!itemProduct) {
     return null;
   }
-
-  const isAddedToCart = cart.some((item) => item.itemId === itemProduct.id);
-  const isFavorite = favourites.some((item) => item.itemId === itemProduct.id);
 
   const createSimpleProduct = (): SimpleProduct => ({
     id: itemProduct.id,
@@ -83,8 +96,9 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   const handleCartClick = () => {
     if (isAddedToCart) {
       const itemInCart = cart.find((item) => item.itemId === itemProduct.id);
+      
       if (itemInCart) {
-        removeFromCart(itemInCart.id);
+        removeFromCart(itemInCart.itemId);
       }
     } else {
       addToCart(productToSave);
@@ -111,7 +125,6 @@ export const ItemCard: React.FC<ItemCardProps> = ({
         ? `/${fallbackMatch.category}/${fallbackMatch.id}`
         : null;
     }
-
     return match ? `/${match.category}/${match.id}` : null;
   };
 
@@ -236,18 +249,18 @@ export const ItemCard: React.FC<ItemCardProps> = ({
                 {isAddedToCart ? (
                   <Link to="/cart" className="flex-1 max-w-[263px] h-12">
                     <PrimaryButton
-                      buttonText="Added to cart"
-                      selected
+                      buttonText={buttonText}
+                      selected={isAddedToCart}
                       onClick={() => {}}
-                      className="flex-1 max-w-[263px] h-12"
+                      className="flex-1 w-full max-w-[263px] h-12"
                     />
                   </Link>
                 ) : (
                   <PrimaryButton
-                    buttonText={'Add to cart'}
+                    buttonText={buttonText}
                     selected={isAddedToCart}
                     onClick={handleCartClick}
-                    className="flex-1 max-w-[263px] h-12"
+                    className="flex-1 w-full max-w-[263px] h-12"
                   />
                 )}
                 <FavoriteButton
@@ -305,6 +318,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
             Tech specs
           </h3>
           <div className="border-t border-element text-[14px] text-right space-y-2 pt-2">
+            {/* Tech specs list ... */}
             <div className="flex justify-between mt-6">
               <span className="text-secondary">Screen</span>
               <span className="text-primary">{itemProduct.screen}</span>
