@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import React, { useEffect, useState, useRef} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { HomeIcon } from '../../atoms/Icons/HomeIcon';
@@ -23,25 +23,24 @@ import type {
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper/types';
-import { useRecommendedProducts } from '../../../hooks/useRecommendedProducts';
 
 type ItemCardProps = {
   itemProduct: CategoryProduct | undefined;
   productList: CategoryProduct[];
+  productsForSlider: SimpleProduct[];
   isLoading: boolean;
-  allProducts?: SimpleProduct[];
 };
 
 export const ItemCard: React.FC<ItemCardProps> = ({
   itemProduct,
   productList,
-  allProducts,
+  productsForSlider,
   isLoading,
 }) => {
   const navigate = useNavigate();
   const [mainImage, setMainImage] = useState<string>('');
-
-  const swiperRef = useRef<SwiperType | null>(null);
+  
+  const swiperRef = useRef<SwiperType | null>(null); 
 
   // --- ZUSTAND HOOKS ---
   const { cart, addToCart, removeFromCart } = useCartStore();
@@ -57,30 +56,6 @@ export const ItemCard: React.FC<ItemCardProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemProduct?.id]);
 
-  const productToSave = useMemo<SimpleProduct | null>(() => {
-    if (!itemProduct) return null;
-
-    return {
-      id: itemProduct.id,
-      category: itemProduct.category,
-      itemId: itemProduct.id,
-      name: itemProduct.name,
-      fullPrice: itemProduct.priceRegular,
-      price: itemProduct.priceDiscount || itemProduct.priceRegular,
-      screen: itemProduct.screen,
-      capacity: itemProduct.capacity,
-      color: itemProduct.color,
-      ram: itemProduct.ram,
-      image: itemProduct.images[0],
-    };
-  }, [itemProduct]);
-
-  const recommendedProducts = useRecommendedProducts(
-    allProducts ?? [],
-    productToSave,
-    10,
-  );
-
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -93,12 +68,26 @@ export const ItemCard: React.FC<ItemCardProps> = ({
     return null;
   }
 
+  const createSimpleProduct = (): SimpleProduct => ({
+    id: itemProduct.id,
+    category: itemProduct.category,
+    itemId: itemProduct.id,
+    name: itemProduct.name,
+    fullPrice: itemProduct.priceRegular,
+    price: itemProduct.priceDiscount || itemProduct.priceRegular,
+    screen: itemProduct.screen,
+    capacity: itemProduct.capacity,
+    color: itemProduct.color,
+    ram: itemProduct.ram,
+    image: itemProduct.images[0],
+  });
+
+  const productToSave = createSimpleProduct();
+
   const handleCartClick = () => {
-    if (!productToSave) return;
-
     if (isAddedToCart) {
-      const itemInCart = cart.find((item) => item.itemId === itemProduct?.id);
-
+      const itemInCart = cart.find((item) => item.itemId === itemProduct.id);
+      
       if (itemInCart) {
         removeFromCart(itemInCart.itemId);
       }
@@ -108,7 +97,6 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   };
 
   const handleFavoriteClick = () => {
-    if (!productToSave) return;
     toggleFavourite(productToSave);
   };
 
@@ -124,8 +112,8 @@ export const ItemCard: React.FC<ItemCardProps> = ({
       const fallbackMatch = productList.find(
         (p) => p.namespaceId === itemProduct.namespaceId && p.color === color,
       );
-      return fallbackMatch ?
-          `/${fallbackMatch.category}/${fallbackMatch.id}`
+      return fallbackMatch
+        ? `/${fallbackMatch.category}/${fallbackMatch.id}`
         : null;
     }
     return match ? `/${match.category}/${match.id}` : null;
@@ -169,10 +157,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
       </div>
 
       <div className="flex items-center gap-1 mb-4">
-        <BackButton
-          text="Back"
-          className="mt-[25px] md:mt-9"
-        />
+        <BackButton text="Back" className="mt-[25px] md:mt-9" />
       </div>
 
       <div>
@@ -190,9 +175,9 @@ export const ItemCard: React.FC<ItemCardProps> = ({
                 src={img}
                 alt={itemProduct.name}
                 className={`h-14 w-14 object-contain cursor-pointer border md:h-16 md:w-16 lg:h-20 lg:w-20 transition-transform duration-300 border-element hover:border-secondary active:border-primary p-2 rounded-none ${
-                  mainImage === img ?
-                    'scale-110 border-primary'
-                  : 'hover:scale-110'
+                  mainImage === img
+                    ? 'scale-110 border-primary'
+                    : 'hover:scale-110'
                 }`}
                 onClick={() => {
                   setMainImage(img);
@@ -207,27 +192,22 @@ export const ItemCard: React.FC<ItemCardProps> = ({
               slidesPerView={1}
               modules={[Navigation]}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
-              onSlideChange={(swiper) =>
-                setMainImage(itemProduct.images[swiper.activeIndex])
-              }
+              onSlideChange={(swiper) => setMainImage(itemProduct.images[swiper.activeIndex])}
               initialSlide={itemProduct.images.indexOf(mainImage)}
-              className="w-full h-full [&_.swiper-pagination]:bottom-2! md:[&_.swiper-wrapper]:pb-0! md:[&_.swiper-pagination]:bottom-1!"
-            >
-              {itemProduct.images.slice(0, 5).map((img, index) => (
-                <SwiperSlide
-                  key={index}
-                  className="flex items-center justify-center"
-                >
-                  <img
-                    src={img}
-                    alt={itemProduct.name}
-                    className="max-w-full max-h-full object-contain"
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+              className="w-full h-full [&_.swiper-slide]:flex! [&_.swiper-slide]:items-center! [&_.swiper-slide]:justify-center!"
+              >
+                {itemProduct.images.slice(0, 5).map((img, index) => (
+                  <SwiperSlide key={index} className="flex items-center justify-center w-full h-full">
+                    <img
+                      src={img}
+                      alt={itemProduct.name}
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
-        </div>
 
         <div className="flex flex-col gap-5 md:w-[48%]">
           <div className="w-full max-w-[320px]">
@@ -274,11 +254,8 @@ export const ItemCard: React.FC<ItemCardProps> = ({
               </div>
 
               <div className="flex items-center gap-3 lg:gap-4">
-                {isAddedToCart ?
-                  <Link
-                    to="/cart"
-                    className="flex-1 max-w-[263px] h-12"
-                  >
+                {isAddedToCart ? (
+                  <Link to="/cart" className="flex-1 max-w-[263px] h-12">
                     <PrimaryButton
                       buttonText="Go to cart"
                       selected={isAddedToCart}
@@ -286,13 +263,14 @@ export const ItemCard: React.FC<ItemCardProps> = ({
                       className="flex-1 w-full max-w-[263px] h-12"
                     />
                   </Link>
-                : <PrimaryButton
+                ) : (
+                  <PrimaryButton
                     buttonText="Add to cart"
                     selected={isAddedToCart}
                     onClick={handleCartClick}
                     className="flex-1 w-full max-w-[263px] h-12"
                   />
-                }
+                )}
                 <FavoriteButton
                   className="w-12 h-12"
                   selected={isFavorite}
@@ -301,7 +279,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
               </div>
             </div>
 
-            <div className="text-xs space-y-2 mt-8">
+            <div className="text-xs text-right space-y-2 mt-8">
               <div className="flex justify-between">
                 <span className="text-secondary">Screen</span>
                 <span className="text-primary">{itemProduct.screen}</span>
@@ -348,7 +326,6 @@ export const ItemCard: React.FC<ItemCardProps> = ({
             Tech specs
           </h3>
           <div className="border-t border-element text-[14px] text-right space-y-2 pt-2">
-            {/* Tech specs list ... */}
             <div className="flex justify-between mt-6">
               <span className="text-secondary">Screen</span>
               <span className="text-primary">{itemProduct.screen}</span>
@@ -392,10 +369,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
       </div>
 
       <div className="mb-12 lg:mb-16">
-        <ProductSlider
-          products={recommendedProducts}
-          title="You may also like"
-        />
+        <ProductSlider products={productsForSlider} title="You may also like" />
       </div>
     </section>
   );
