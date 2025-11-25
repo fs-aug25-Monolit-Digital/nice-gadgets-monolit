@@ -61,7 +61,6 @@ export const ItemCard: React.FC<ItemCardProps> = ({
     return null;
   }
 
-  // 1. ВИПРАВЛЯЄМО ПЕРЕВІРКУ (шукаємо за itemId)
   const isAddedToCart = cart.some((item) => item.itemId === itemProduct.id);
   const isFavorite = favourites.some((item) => item.itemId === itemProduct.id);
 
