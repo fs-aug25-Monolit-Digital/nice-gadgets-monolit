@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { HomeIcon } from '../../atoms/Icons/HomeIcon';
 import { ArrowRightIcon } from '../../atoms/Icons/ArrowRightIcon';
@@ -233,12 +233,23 @@ export const ItemCard: React.FC<ItemCardProps> = ({
               </div>
 
               <div className="flex items-center gap-3 lg:gap-4">
-                <PrimaryButton
-                  buttonText={isAddedToCart ? 'Added to cart' : 'Add to cart'}
-                  selected={isAddedToCart}
-                  onClick={handleCartClick}
-                  className="flex-1 max-w-[263px] h-12"
-                />
+                {isAddedToCart ? (
+                  <Link to="/cart" className="flex-1 max-w-[263px] h-12">
+                    <PrimaryButton
+                      buttonText="Added to cart"
+                      selected
+                      onClick={() => {}}
+                      className="flex-1 max-w-[263px] h-12"
+                    />
+                  </Link>
+                ) : (
+                  <PrimaryButton
+                    buttonText={'Add to cart'}
+                    selected={isAddedToCart}
+                    onClick={handleCartClick}
+                    className="flex-1 max-w-[263px] h-12"
+                  />
+                )}
                 <FavoriteButton
                   className="w-12 h-12"
                   selected={isFavorite}

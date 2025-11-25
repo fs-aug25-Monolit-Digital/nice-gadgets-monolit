@@ -93,12 +93,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
       <div className="flex items-center gap-4 justify-between mt-auto ">
         <div className="grow">
-          <PrimaryButton
-            buttonText={isAdded ? "Added to cart" : "Add to cart"}
-            selected={isAdded}
-            onClick={handleAddToCart}
-            className="lg:w-40"
-          />
+          {isAdded ? (
+            <Link to="/cart" className="flex-1 max-w-[263px] h-12">
+              <PrimaryButton
+                buttonText="Added to cart"
+                selected
+                onClick={() => {}}
+                className="flex-1 max-w-[263px] h-12"
+              />
+            </Link>
+          ) : (
+            <PrimaryButton
+              buttonText="Add to cart"
+              selected={isAdded}
+              onClick={handleAddToCart}
+              className="flex-1 max-w-[263px] h-12"
+            />
+          )}
         </div>
 
         <div>
