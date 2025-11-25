@@ -6,6 +6,7 @@ import { Pagination } from './Pagination';
 import type { SimpleProduct } from '../../../types/CategoryProduct';
 import type { SortOption } from '../../../types/SortProducts';
 import { MainLoader } from '../../atoms/Loaders/MainLoader';
+import { useEffect, useState } from 'react';
 
 type Props = {
   isLoading: boolean;
@@ -33,7 +34,27 @@ export const ProductsPageTemplate: React.FC<Props> = ({
   onPageChange,
   onPerPageChange,
 }) => {
-  if (isLoading)
+  const [localLoading, setLocalLoading] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLocalLoading(true);
+
+    const timeout = setTimeout(() => {
+      setLocalLoading(false);
+    }, 700);
+
+    return () => clearTimeout(timeout);
+  }, [currentPage, sort, perPage]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, [currentPage]);
+
+  if (isLoading || !products.length)
     return (
       <div className="min-h-screen flex items-center justify-center">
         <MainLoader />
@@ -79,7 +100,11 @@ export const ProductsPageTemplate: React.FC<Props> = ({
         </div>
       </div>
 
-      <GridForProducts products={products} />
+      <GridForProducts
+        products={products}
+        isLoading={localLoading}
+        perPage={perPage}
+      />
       <div className="flex justify-center items-center">
         <Pagination
           totalProducts={totalProducts}

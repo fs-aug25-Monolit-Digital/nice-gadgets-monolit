@@ -29,7 +29,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-
     <div
       className={` w-full p-7 rounded-none border border-element bg-white-card transition-all duration-300 ease-linear
         ${className}`}

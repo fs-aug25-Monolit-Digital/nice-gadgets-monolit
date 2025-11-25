@@ -1,22 +1,32 @@
-import { useMemo } from 'react';
-import { useProducts } from '../../hooks/useProduct';
 import { getProducts, getTablets } from '../../utilities/fetchApi';
 import { ProductsPageTemplate } from '../templates/ProductsPageTemplate/ProductsPageTemplate';
-import { useCurrentProduct } from '../../hooks/useCurrentProduct';
 import { ItemCard } from '../templates/ItemCard/ItemCard';
 import { ErrorComponent } from '../organisms/ErrorComponent';
+import { type CategoryKey } from '../../stores/useProductsControls';
+import { useCategoryPage } from '../../hooks/useCategoryPage';
 
 export const TabletsPage = () => {
-  const { data: products, isLoading, hasError } = useProducts(getProducts);
-  const { data: categoryProducts } = useProducts(getTablets);
-  const { currentProduct, productSlug } = useCurrentProduct(categoryProducts);
+  const CATEGORY: CategoryKey = 'tablets';
 
-  const tablets = useMemo(() => {
-    return products.filter((p) => p.category === 'tablets');
-  }, [products]);
+  const {
+    isLoading,
+    hasError,
+    productSlug,
+    currentProduct,
+    filteredProducts,
+    totalAfterFilter,
+    sort,
+    perPage,
+    currentPage,
+    handleSortChange,
+    handlePerPageChange,
+    handlePageChange,
+    categoryProducts,
+    products,
+  } = useCategoryPage(CATEGORY, getProducts, getTablets);
 
   if (hasError) {
-    return <ErrorComponent />
+    return <ErrorComponent />;
   }
 
   return (
@@ -25,12 +35,14 @@ export const TabletsPage = () => {
         <ProductsPageTemplate
           isLoading={isLoading}
           title={'Tablets'}
-          products={tablets}
-          totalProducts={tablets.length}
-          sort={'Newest'}
-          perPage={16}
-          currentPage={1}
-          onPageChange={() => {}}
+          products={filteredProducts}
+          totalProducts={totalAfterFilter}
+          sort={sort}
+          perPage={perPage}
+          currentPage={currentPage}
+          onSortChange={handleSortChange}
+          onPerPageChange={handlePerPageChange}
+          onPageChange={handlePageChange}
         />
       : <ItemCard
           isLoading={isLoading}
