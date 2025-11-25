@@ -78,7 +78,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   const recommendedProducts = useRecommendedProducts(
     allProducts ?? [],
     productToSave,
-    15,
+    10,
   );
 
   if (isLoading) {

@@ -4,7 +4,7 @@ import type { SimpleProduct } from '../types/CategoryProduct';
 export const useRecommendedProducts = (
   allProducts: SimpleProduct[] = [],
   currentProduct: SimpleProduct | null,
-  limit = 8
+  limit = 10
 ) => {
   return useMemo(() => {
     if (!Array.isArray(allProducts) || !allProducts.length || !currentProduct) {

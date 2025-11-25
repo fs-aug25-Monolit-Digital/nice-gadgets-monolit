@@ -7,18 +7,26 @@ import 'swiper/css/navigation';
 import type { SimpleProduct } from '../../../types/CategoryProduct';
 import { ArrowLeftButton, ArrowRightButton } from '../../atoms/UtilityButton';
 import { useState } from 'react';
+import { ProductCardSkeleton } from '../../molecules/ProductCardSceleton';
 
 type Props = {
   products: SimpleProduct[];
   title: string;
+  isLoading?: boolean;
 };
 
-export const ProductSlider: React.FC<Props> = ({ products, title }) => {
+export const ProductSlider: React.FC<Props> = ({
+  products,
+  title,
+  isLoading = false,
+}) => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(
     null,
   );
   const [hasPrev, setHasPrev] = useState(false);
   const [hasNext, setHasNext] = useState(true);
+
+  const showSkeletons = isLoading || !products.length;
 
   const handlePrev = () => {
     if (swiperInstance) {
@@ -67,16 +75,27 @@ export const ProductSlider: React.FC<Props> = ({ products, title }) => {
             />
           </div>
         </div>
-        {products.map((product) => {
-          return (
+        {showSkeletons ?
+          Array.from({ length: 8 }).map((_, index) => (
+            <SwiperSlide
+              className="w-[272px]! pb-4"
+              key={`skeleton-${index}`}
+            >
+              <ProductCardSkeleton />
+            </SwiperSlide>
+          ))
+        : products.map((product) => (
             <SwiperSlide
               className="w-auto! pb-4"
               key={product.id}
             >
-              <ProductCard product={product} className='max-w-[272px]' />
+              <ProductCard
+                product={product}
+                className="max-w-[272px]"
+              />
             </SwiperSlide>
-          );
-        })}
+          ))
+        }
       </Swiper>
     </section>
   );
