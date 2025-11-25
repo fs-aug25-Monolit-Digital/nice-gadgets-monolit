@@ -5,7 +5,6 @@ import { FavoriteButton } from "../atoms/UtilityButton";
 import type { SimpleProduct } from "../../types/CategoryProduct";
 import { useFavouritesStore } from "../../stores/useFavouritesStore";
 import { useCartStore } from "../../stores/useCartStore";
-import { useEffect, useState } from "react";
 
 type ProductCardProps = {
   product: SimpleProduct;
@@ -21,23 +20,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const isAdded = cart.some((item) => item.itemId === product.itemId);
   const isFavorite = favourites.some((item) => item.itemId === product.itemId);
-
-  const [buttonText, setButtonText] = useState("Add to cart");
   
-  useEffect(() => {
-    if (isAdded) {
-      setButtonText("Added to cart");
-
-      const timer = setTimeout(() => {
-        setButtonText("Go to cart");
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    } else {
-      setButtonText("Add to cart");
-    }
-  }, [isAdded]);
-
   const handleAddToCart = () => {
     if (!isAdded) {
       addToCart(product);
@@ -111,7 +94,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           {isAdded ? (
             <Link to="/cart" className="flex-1 max-w-[263px] h-12">
               <PrimaryButton
-                buttonText={buttonText}
+                buttonText="Go to cart"
                 selected={isAdded}
                 onClick={() => {}}
                 className="flex-1 w-full max-w-[263px] h-12"
@@ -119,7 +102,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             </Link>
           ) : (
             <PrimaryButton
-              buttonText={buttonText}
+              buttonText="Add to cart"
               selected={isAdded}
               onClick={handleAddToCart}
               className="flex-1 w-full max-w-[263px] h-12"

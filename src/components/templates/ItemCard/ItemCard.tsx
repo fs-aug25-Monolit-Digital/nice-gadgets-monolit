@@ -51,20 +51,6 @@ export const ItemCard: React.FC<ItemCardProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemProduct?.id]);
 
-  const [buttonText, setButtonText] = useState("Add to cart");
-
-  useEffect(() => {
-    if (isAddedToCart) {
-      setButtonText("Added to cart");
-      const timer = setTimeout(() => {
-        setButtonText("Go to cart");
-      }, 2000);
-      return () => clearTimeout(timer);
-    } else {
-      setButtonText("Add to cart");
-    }
-  }, [isAddedToCart]);
-
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -249,7 +235,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
                 {isAddedToCart ? (
                   <Link to="/cart" className="flex-1 max-w-[263px] h-12">
                     <PrimaryButton
-                      buttonText={buttonText}
+                      buttonText="Go to cart"
                       selected={isAddedToCart}
                       onClick={() => {}}
                       className="flex-1 w-full max-w-[263px] h-12"
@@ -257,7 +243,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
                   </Link>
                 ) : (
                   <PrimaryButton
-                    buttonText={buttonText}
+                    buttonText="Add to cart"
                     selected={isAddedToCart}
                     onClick={handleCartClick}
                     className="flex-1 w-full max-w-[263px] h-12"
