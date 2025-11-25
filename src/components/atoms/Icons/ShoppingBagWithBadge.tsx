@@ -15,7 +15,7 @@ export const ShoppingBagWithBadge: React.FC<Props> = ({ className, countBag }) =
        <span
           className="
             absolute -top-2 -right-2
-            bg-accent-red text-white border border-white
+            bg-accent-red text-white-dark border border-white transition-colors duration-300
             text-[8px] w-4 h-4
             flex items-center justify-center
             rounded-full"
