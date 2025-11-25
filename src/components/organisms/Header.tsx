@@ -7,8 +7,12 @@ import { Logo } from '../atoms/Logo/Logo';
 import { SearchButtonWithInput } from '../atoms/UtilityButton/SearchButtonWithInput';
 import { SearchInput } from '../molecules/SearchInput/SearchInput';
 import { ThemeButton } from '../atoms/UtilityButton/ThemeButton';
+import { useRefreshStore } from '../../stores/useRefreshStore';
+import { useLocation } from 'react-router-dom';
 
 export const Header: React.FC = () => {
+    const triggerRefresh = useRefreshStore((s) => s.triggerRefresh);
+    const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -29,10 +33,10 @@ export const Header: React.FC = () => {
         </div>
 
         <div className="flex items-center h-full">
-          <ThemeButton />
           <div className="flex lg:hidden items-center">
              <SearchButtonWithInput className="w-[48px] h-[48px]" />
           </div>
+          <ThemeButton onClick={location.pathname === '/contacts' ? triggerRefresh : undefined}/>
           
           <HeaderActions />
           

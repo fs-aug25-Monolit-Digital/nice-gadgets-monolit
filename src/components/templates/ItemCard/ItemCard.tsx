@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { HomeIcon } from '../../atoms/Icons/HomeIcon';
@@ -20,6 +20,9 @@ import type {
   CategoryProduct,
   SimpleProduct,
 } from '../../../types/CategoryProduct';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper/types';
 
 type ItemCardProps = {
   itemProduct: CategoryProduct | undefined;
@@ -36,6 +39,8 @@ export const ItemCard: React.FC<ItemCardProps> = ({
 }) => {
   const navigate = useNavigate();
   const [mainImage, setMainImage] = useState<string>('');
+  
+  const swiperRef = useRef<SwiperType | null>(null); 
 
   // --- ZUSTAND HOOKS ---
   const { cart, addToCart, removeFromCart } = useCartStore();
@@ -174,18 +179,35 @@ export const ItemCard: React.FC<ItemCardProps> = ({
                     ? 'scale-110 border-primary'
                     : 'hover:scale-110'
                 }`}
-                onClick={() => setMainImage(img)}
+                onClick={() => {
+                  setMainImage(img);
+                  swiperRef.current?.slideTo(index);
+                }}
               />
             ))}
           </div>
           <div className="w-full sm:w-[288px] md:w-[287px] lg:w-[464px] aspect-square flex items-center justify-center overflow-hidden mx-auto md:mx-0 order-1 md:order-2">
-            <img
-              src={mainImage}
-              alt={itemProduct.name}
-              className="max-w-full max-h-full object-contain"
-            />
+            <Swiper
+              spaceBetween={0}
+              slidesPerView={1}
+              modules={[Navigation]}
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
+              onSlideChange={(swiper) => setMainImage(itemProduct.images[swiper.activeIndex])}
+              initialSlide={itemProduct.images.indexOf(mainImage)}
+              className="w-full h-full [&_.swiper-pagination]:bottom-2! md:[&_.swiper-wrapper]:pb-0! md:[&_.swiper-pagination]:bottom-1!"
+              >
+                {itemProduct.images.slice(0, 5).map((img, index) => (
+                  <SwiperSlide key={index} className="flex items-center justify-center">
+                    <img
+                      src={img}
+                      alt={itemProduct.name}
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
-        </div>
 
         <div className="flex flex-col gap-5 md:w-[48%]">
           <div className="w-full max-w-[320px]">
