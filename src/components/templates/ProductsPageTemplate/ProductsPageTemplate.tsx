@@ -54,7 +54,7 @@ export const ProductsPageTemplate: React.FC<Props> = ({
     });
   }, [currentPage]);
 
-  if (isLoading || localLoading)
+  if (isLoading || !products.length)
     return (
       <div className="min-h-screen flex items-center justify-center">
         <MainLoader />
@@ -100,7 +100,11 @@ export const ProductsPageTemplate: React.FC<Props> = ({
         </div>
       </div>
 
-      <GridForProducts products={products} />
+      <GridForProducts
+        products={products}
+        isLoading={localLoading}
+        perPage={perPage}
+      />
       <div className="flex justify-center items-center">
         <Pagination
           totalProducts={totalProducts}
