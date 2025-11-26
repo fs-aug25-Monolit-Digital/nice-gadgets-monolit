@@ -3,7 +3,6 @@ import { GridForProducts } from './GridForProducts';
 import { Pagination } from './Pagination';
 import type { SimpleProduct } from '../../../types/CategoryProduct';
 import type { SortOption } from '../../../types/SortProducts';
-import { MainLoader } from '../../atoms/Loaders/MainLoader';
 import { useEffect, useState } from 'react';
 import { Breadcrumb } from '../../atoms/Breadcrumb/Breadcrumb';
 
@@ -22,7 +21,6 @@ type Props = {
 };
 
 export const ProductsPageTemplate: React.FC<Props> = ({
-  isLoading,
   title,
   products,
   totalProducts,
@@ -53,12 +51,6 @@ export const ProductsPageTemplate: React.FC<Props> = ({
     });
   }, [currentPage]);
 
-  if (isLoading || !products.length)
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <MainLoader />
-      </div>
-    );
   return (
     <section className="w-full flex flex-col">
       <div className="w-full mb-6">

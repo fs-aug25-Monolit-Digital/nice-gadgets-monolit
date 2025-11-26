@@ -38,7 +38,7 @@ export const useHomePageProducts = (products: SimpleProduct[]) => {
 
   const brandNewProducts = useMemo(() => {
     return [...uniqueProducts]
-    .sort((a, b) => b.year - a.year)
+    .sort((a, b) => (b.year ?? 0) - (a.year ?? 0))
     .slice(0, 10);
   }, [uniqueProducts]);
 

@@ -59,9 +59,11 @@ export const getProductsWithDiscount = (
 
 // Нові
 export const getBrandNewProducts = (
-  products: SimpleProduct[],
+  products: SimpleProduct[]
 ): SimpleProduct[] => {
-  const latestYear = Math.max(...products.map(p => p.year));
+
+  const latestYear = Math.max(...products.map(p => p.year || 0));
+
   return products.filter(p => p.year === latestYear);
 };
 
@@ -69,3 +71,4 @@ export const getBrandNewProducts = (
 export const getProductDetailsByItemId = (itemId: string): DetailedProduct | null => {
   return productDetailsMap.get(itemId) || null;
 };
+
