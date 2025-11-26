@@ -1,9 +1,4 @@
-import {
-  getAccessories,
-  getPhones,
-  getProducts,
-  getTablets,
-} from '../../utilities/fetchApi';
+import { getProducts } from '../../utilities/fetchApi';
 import { useProducts } from '../../hooks/useProduct';
 import { HomePageTemplate } from '../templates/HomePageTemplate';
 import { useHomePageProducts } from '../../hooks/useHomePageProducts';
