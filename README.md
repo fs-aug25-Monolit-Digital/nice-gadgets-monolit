@@ -91,6 +91,21 @@ This feature is also managed by a **Zustand store** for consistency and performa
 
 ---
 
+### ✅ Product Search (Search input)
+
+The application includes a **search input field** that allows users to quickly find specific products by name.
+
+Search functionality includes:
+
+- Real-time filtering as the user types
+- Search by **product name**
+- Case-insensitive matching
+- Automatically updates the displayed product list
+
+The search state is synchronized with URL parameters, which means that search results can be shared and restored after page reload.
+
+This significantly improves user experience by helping users find the desired product faster and more efficiently.
+
 ### ✅ Toast / Notification System
 
 The application includes a custom notification system to give instant feedback, for example:
@@ -118,8 +133,8 @@ To prevent blank screens during data fetching, two different loaders are used:
 1. **Main Loader**  
    Displayed while entire pages are loading.
 
-2. **Skeleton Loader**  
-   Displayed inside product cards and product pages while content is loading.
+2. **Skeleton Loaders**  
+   Displayed inside product cards and pages while content is loading.
 
 This creates a smooth and professional loading experience.
 
