@@ -1,5 +1,3 @@
-import { ArrowRightIcon } from '../../atoms/Icons/ArrowRightIcon';
-import { HomeButton } from '../../atoms/UtilityButton';
 import { Dropdown } from '../../molecules/Dropdown/Dropdown';
 import { GridForProducts } from './GridForProducts';
 import { Pagination } from './Pagination';
@@ -7,6 +5,7 @@ import type { SimpleProduct } from '../../../types/CategoryProduct';
 import type { SortOption } from '../../../types/SortProducts';
 import { MainLoader } from '../../atoms/Loaders/MainLoader';
 import { useEffect, useState } from 'react';
+import { Breadcrumb } from '../../atoms/Breadcrumb/Breadcrumb';
 
 type Props = {
   isLoading: boolean;
@@ -63,11 +62,9 @@ export const ProductsPageTemplate: React.FC<Props> = ({
   return (
     <section className="w-full flex flex-col">
       <div className="w-full mb-6">
-        <div className="flex items-center gap-2 text-sm text-secondary mb-6 lg:mb-10">
-          <HomeButton />
-          <ArrowRightIcon />
-          <p>Phones</p>
-        </div>
+
+           <Breadcrumb product={products[currentPage]} hideProductName />
+
 
         <h1 className="mb-2 text-primary font-extrabold leading-[41px] md:leading-14 text-[32px] md:text-[48px] tracking-[-1%]">
           {title}
