@@ -3,6 +3,11 @@ The **Monolit Digital Store** is a modern e-commerce web application for selling
 The project is built using Atomic Design principles, fully responsive layout, and a modern JavaScript stack.
 ### Live Demo
 Experience the live website: [Monolit Digital Store Demo](https://fs-aug25-monolit-digital.github.io/nice-gadgets-monolit/)
+
+# Design Reference
+- [Design Reference (Light)](https://www.figma.com/design/T5ttF21UnT6RRmCQQaZc6L/Phone-catalog--V2--Original?node-id=0-1&t=0ASdgDdVnZ46JKIX-1)
+- [Design Reference (Dark)](https://www.figma.com/design/BUusqCIMAWALqfBahnyIiH/Phone-catalog--V2--Original-Dark?node-id=0-1&t=KpCQfE8kWqGPnqd1-1)
+  
 ## ✨ Features — Detailed Overview
 
 ### ✅ Product Catalog (Phones / Tablets / Accessories)
@@ -117,6 +122,7 @@ Theme features include:
 - Seamless switching between light and dark themes
 - Custom styling built on top of DaisyUI themes
 - Consistent colors for backgrounds, text, borders, and UI elements
+- Theme persistence between sessions (saved in browser storage)
 - Improved accessibility and visual comfort for users
 
 Using DaisyUI allows scalable and maintainable theming while keeping the codebase clean and flexible.
@@ -204,7 +210,7 @@ This ensures that the user's choices are preserved even after refreshing the pag
 
 ### UI / UX & Components
 - **Atomic Design Methodology** – Components are structured into atoms, molecules, organisms, templates, and pages for better scalability and reusability.
-- **Radix UI – Used for accessible, unstyled UI primitives and customizable components (e.g., toast notifications, buttons, modals).
+- **Radix UI** – Used for accessible, unstyled UI primitives and customizable components (e.g., toast notifications, buttons, modals).
 - **Swiper.js** – Implements responsive and interactive sliders for product showcases.
 - **Classnames (cn)** – Simplifies conditional class handling for dynamic styling.
 
