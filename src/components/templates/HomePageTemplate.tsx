@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import type { SimpleProduct } from '../../types/CategoryProduct';
 import { MainLoader } from '../atoms/Loaders/MainLoader';
 import { ShopByCategory } from '../organisms/ShopByCategory';
@@ -29,13 +30,26 @@ export const HomePageTemplate: React.FC<Props> = ({
   secondSliderTitle,
   secondSliderProducts,
 }) => {
-  if (isLoading)
+  const [initialLoad, setInitialLoad] = useState(true);
+
+  useEffect(() => {
+    if (!isLoading) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setInitialLoad(false);
+    }
+  }, [isLoading]);
+  if (
+    initialLoad &&
+    isLoading &&
+    !firstSliderProducts.length &&
+    !secondSliderProducts.length
+  )
     return (
       <div className="min-h-screen flex items-center justify-center">
         <MainLoader />
       </div>
     );
-  
+
   return (
     <section>
       <h1 className="h1 mb-6 md:mb-8 lg:mb-14">{title}</h1>
@@ -54,6 +68,7 @@ export const HomePageTemplate: React.FC<Props> = ({
         <ProductSlider
           title={secondSliderTitle}
           products={secondSliderProducts}
+          isLoading={isLoading}
         />
       </div>
     </section>
