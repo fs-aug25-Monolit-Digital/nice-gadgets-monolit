@@ -106,6 +106,23 @@ The search state is synchronized with URL parameters, which means that search re
 
 This significantly improves user experience by helping users find the desired product faster and more efficiently.
 
+---
+
+### ✅ Light & Dark Mode (Tailwind CSS + DaisyUI)
+
+The application supports both **Light Mode** and **Dark Mode**, implemented using **Tailwind CSS** together with **DaisyUI** theme extensions.
+
+Theme features include:
+
+- Seamless switching between light and dark themes
+- Custom styling built on top of DaisyUI themes
+- Consistent colors for backgrounds, text, borders, and UI elements
+- Improved accessibility and visual comfort for users
+
+Using DaisyUI allows scalable and maintainable theming while keeping the codebase clean and flexible.
+
+---
+
 ### ✅ Toast / Notification System
 
 The application includes a custom notification system to give instant feedback, for example:
