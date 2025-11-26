@@ -20,10 +20,11 @@ export const BackButton: React.FC<BackButtonProps> = ({ text, className }) => {
         "hover:text-primary",
         "transition-colors duration-300",
         'group',
+        'cursor-pointer',
         className
       )}
       >
-        <ArrowLeftButton className='border-0'/>
+        <ArrowLeftButton className='border-0 cursor-pointer'/>
         {text}
       </button>
     </div>

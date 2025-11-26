@@ -11,9 +11,9 @@ interface BreadcrumbProps {
 
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({ product, hideProductName }) => {
     return (
-        <div className="flex items-center gap-2 overflow-hidden sm:mb-6 md:mb-10 mt-6">
-            <Link to="/" className="flex items-center justify-center w-6 h-6">
-                <HomeButton />
+        <div className="flex items-center gap-2 overflow-hidden sm:mb-6 md:mb-10 mt-6 cursor-pointer">
+            <Link to="/" className="flex items-center justify-center w-6 h-6 ">
+                <HomeButton className="cursor-pointer"/>
             </Link>
 
             <ArrowRightIcon className="shrink-0" />
@@ -28,7 +28,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ product, hideProductName
                 </Link>
             </span>
                     <ArrowRightIcon />
-                    <span className="text-secondary whitespace-nowrap overflow-hidden text-ellipsis">
+                    <span className="text-secondary whitespace-nowrap overflow-hidden text-ellipsis cursor-text">
                         {product.name}
                     </span>
                 </>
