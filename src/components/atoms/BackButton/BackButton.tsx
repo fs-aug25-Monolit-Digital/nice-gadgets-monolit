@@ -1,6 +1,7 @@
 import cn from 'classnames';
-import { ArrowLeftButton } from '../UtilityButton';
+
 import { useNavigate } from 'react-router-dom';
+import { ArrowLeftIcon } from '../Icons/ArrowLeftIcon';
 
 type BackButtonProps = {
   text?: string;
@@ -24,7 +25,7 @@ export const BackButton: React.FC<BackButtonProps> = ({ text, className }) => {
         className
       )}
       >
-        <ArrowLeftButton className='border-0 cursor-pointer'/>
+        <ArrowLeftIcon className='group-hover:text-primary transition-colors duration-300 border-0 cursor-pointer'/>
         {text}
       </button>
     </div>
