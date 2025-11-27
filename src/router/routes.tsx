@@ -50,6 +50,17 @@ export const AppRoutes = () => (
       </SignedOut>
     } />
 
-    <Route path="*" element={<NotFoundPage />} />
+      <Route
+        path="/sign-up/*"
+        element={
+          <SignedOut>
+            <SignUp
+              routing="path"
+              path="/sign-up"
+              signInUrl="/sign-in"
+            />
+          </SignedOut>
+        }
+      />
   </Routes>
 );
