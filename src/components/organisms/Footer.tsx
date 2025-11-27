@@ -60,9 +60,8 @@ export const Footer: React.FC = () => {
             Contacts
           </Link>
 
-          <a
-            href="#/rights"
-            target="_blank"
+          <Link
+            to="/rights"
             className={cn(
               'font-bold',
               'text-[12px] leading-[11px]',
@@ -73,7 +72,7 @@ export const Footer: React.FC = () => {
             )}
           >
             Rights
-          </a>
+          </Link>
         </nav>
 
         <a
