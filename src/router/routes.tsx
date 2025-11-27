@@ -9,7 +9,7 @@ import { MainLayout } from '../components/layouts/MainLayout';
 import { FavouritePage } from '../components/pages/FavouritesPage';
 import { CartPage } from '../components/pages/CartPage';
 import { ContactsPage } from '../components/pages/ContactsPage';
-import { SignedOut, SignIn, SignUp, AuthenticateWithRedirectCallback } from '@clerk/clerk-react';
+import { SignedOut, SignIn, SignUp } from '@clerk/clerk-react';
 import { SearchResultPage } from '../components/pages/SearchResultPage';
 import { RightsPage } from '../components/pages/RightsPage';
 import { CheckoutPage } from '../components/pages/CheckoutPage';
@@ -33,34 +33,20 @@ export const AppRoutes = () => (
       <Route path='/searchResults' element={<SearchResultPage />}/>
       <Route path='/rights' element={<RightsPage />}/>
       <Route path='/checkout' element={<CheckoutPage />}/>
-      <Route path="/sso-callback" element={<AuthenticateWithRedirectCallback />} />
-      
       <Route path="*" element={<NotFoundPage />} />
     </Route>
 
-    <Route path='/sign-in/*' element={
+    <Route path='/sign-in' element={
       <SignedOut>
-        <SignIn routing="path" path="/sign-in" />
+        <SignIn routing='hash'/>
       </SignedOut>
     } />
     
-    <Route path='/sign-up/*' element={
+    <Route path='/sign-up' element={
       <SignedOut>
-        <SignUp routing="path" path="/sign-up" />
+        <SignUp routing='hash'/>
       </SignedOut>
     } />
 
-      <Route
-        path="/sign-up/*"
-        element={
-          <SignedOut>
-            <SignUp
-              routing="path"
-              path="/sign-up"
-              signInUrl="/sign-in"
-            />
-          </SignedOut>
-        }
-      />
   </Routes>
 );
