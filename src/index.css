@@ -47,6 +47,9 @@
 
   --shadow-custom: 0px 3px 13px 5px #17203166;
   --shadow-custom-white: 0px 3px 13px 5px #0f1121;
+
+
+  --clerk-bg: rgb(30, 35, 39);
 }
 
 html.dark {
@@ -70,6 +73,11 @@ html.dark {
   --color-accent-red: #eb5757;
   
   --shadow-custom: 0px 3px 13px 5px #17203166;
+
+
+  --clerk-bg: #0f1121;
+  --clerk-text: #ffffff;
+  --clerk-input: #0f1121;
 }
 
 @layer components {
