@@ -9,7 +9,7 @@ import { MainLayout } from '../components/layouts/MainLayout';
 import { FavouritePage } from '../components/pages/FavouritesPage';
 import { CartPage } from '../components/pages/CartPage';
 import { ContactsPage } from '../components/pages/ContactsPage';
-import { SignedOut, SignIn, SignUp } from '@clerk/clerk-react';
+import { SignedOut, SignIn, SignUp, AuthenticateWithRedirectCallback } from '@clerk/clerk-react';
 import { SearchResultPage } from '../components/pages/SearchResultPage';
 import { RightsPage } from '../components/pages/RightsPage';
 import { CheckoutPage } from '../components/pages/CheckoutPage';
@@ -21,33 +21,34 @@ export const AppRoutes = () => (
     </Route>
 
     <Route element={<MainLayout />}>
-      <Route path="/phones" element={<PhonesPage />}></Route>
-      <Route path='/phones/:productSlug' element={<PhonesPage />}></Route>
+      <Route path="/phones" element={<PhonesPage />} />
+      <Route path='/phones/:productSlug' element={<PhonesPage />} />
       <Route path="/tablets" element={<TabletsPage />} />
-      <Route path='/tablets/:productSlug' element={<TabletsPage />}></Route>
+      <Route path='/tablets/:productSlug' element={<TabletsPage />} />
       <Route path="/accessories" element={<AccessoriesPage />} />
-      <Route path='/accessories/:productSlug' element={<AccessoriesPage />}></Route>
+      <Route path='/accessories/:productSlug' element={<AccessoriesPage />} />
       <Route path="/favourites" element={<FavouritePage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path='/contacts' element={<ContactsPage />}/>
       <Route path='/searchResults' element={<SearchResultPage />}/>
       <Route path='/rights' element={<RightsPage />}/>
       <Route path='/checkout' element={<CheckoutPage />}/>
+      <Route path="/sso-callback" element={<AuthenticateWithRedirectCallback />} />
+      
       <Route path="*" element={<NotFoundPage />} />
     </Route>
 
-    <Route
-        path="/sign-in/*"
-        element={
-          <SignedOut>
-            <SignIn
-              routing="path"
-              path="/sign-in"
-              signUpUrl="/sign-up"
-            />
-          </SignedOut>
-        }
-      />
+    <Route path='/sign-in/*' element={
+      <SignedOut>
+        <SignIn routing="path" path="/sign-in" />
+      </SignedOut>
+    } />
+    
+    <Route path='/sign-up/*' element={
+      <SignedOut>
+        <SignUp routing="path" path="/sign-up" />
+      </SignedOut>
+    } />
 
       <Route
         path="/sign-up/*"
