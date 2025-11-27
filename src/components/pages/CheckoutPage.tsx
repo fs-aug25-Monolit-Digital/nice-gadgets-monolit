@@ -40,36 +40,35 @@ export const CheckoutPage: React.FC = () => {
 
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, boolean>>>({});
 
-  // --- ОБРОБКА ВВЕДЕННЯ ---
+  // --- INPUT HANDLING ---
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    // Логіка для телефону: тільки цифри та "+"
+    // --- PHONE LOGIC ---
     if (name === 'phone') {
       if (!/^[0-9+]*$/.test(value)) {
-        return; // Ігноруємо недопустимі символи
+        return;
       }
       if (value.length > 13) {
-        return; // Обмежуємо довжину
+        return;
       }
     }
 
     setFormData((prev) => ({ ...prev, [name]: value }));
     
-    // Прибираємо помилку при введенні
     if (errors[name as keyof FormData]) {
       setErrors((prev) => ({ ...prev, [name]: false }));
     }
   };
 
-  // --- ОБРОБКА ОПЛАТИ (ВАЛІДАЦІЯ) ---
+  // --- PAYMENT HANDLING (VALIDATION) ---
   const handlePayment = () => {
     if (cart.length === 0) return;
 
     const newErrors: Partial<Record<keyof FormData, boolean>> = {};
     let hasError = false;
 
-    // 1. Перевірка на порожні поля
+    // --- 1. EMPTY FIELDS CHECK ---
     Object.keys(formData).forEach((key) => {
       const fieldKey = key as keyof FormData;
       if (!formData[fieldKey].trim()) {
@@ -78,14 +77,14 @@ export const CheckoutPage: React.FC = () => {
       }
     });
 
-    // 2. Додаткова перевірка Email (має містити @ та крапку)
+    // --- 2. EMAIL VALIDATION ---
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
       newErrors.email = true;
       hasError = true;
     }
 
-    // 3. Додаткова перевірка Телефону (мінімум 10 символів)
+    // --- 3. PHONE VALIDATION ---
     if (formData.phone && formData.phone.length < 10) {
       newErrors.phone = true;
       hasError = true;
@@ -94,7 +93,7 @@ export const CheckoutPage: React.FC = () => {
     setErrors(newErrors);
 
     if (hasError) {
-      return; // Якщо є помилки, не продовжуємо
+      return;
     }
 
     checkout(); 
