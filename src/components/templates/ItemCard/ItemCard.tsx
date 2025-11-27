@@ -177,7 +177,6 @@ export const ItemCard: React.FC<ItemCardProps> = ({
       <div className="flex flex-col md:flex-row items-start justify-center gap-8 md:gap-6 lg:gap-12 xl:gap-16 mb-20 w-full">
         
         {/* --- LEFT COLUMN (IMAGES) --- */}
-        {/* FIX: Додано items-center для центрування на мобільному, md:items-start щоб повернути як було на десктопі */}
         <div className="w-full md:flex-1 md:w-1/2 max-w-[600px] flex flex-col-reverse items-center md:items-start md:flex-row gap-4 md:gap-6 lg:gap-8 mx-auto md:mx-0">
           
           {/* Thumbnails */}
@@ -202,7 +201,6 @@ export const ItemCard: React.FC<ItemCardProps> = ({
           </div>
 
           {/* Main Image Swiper */}
-          {/* FIX: Замінив sm:w-[287px] на w-full max-w-[320px] md:max-w-full. Це відцентрує його і дасть нормальний розмір */}
           <div className="w-full max-w-[320px] md:max-w-full aspect-square flex items-center justify-center overflow-hidden">
             <Swiper
               spaceBetween={0}
