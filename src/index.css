@@ -50,6 +50,9 @@
 
   --shadow-custom: 0px 3px 13px 5px #17203166;
   --shadow-custom-white: 0px 3px 13px 5px #0f1121;
+
+
+  --clerk-bg: rgb(30, 35, 39);
 }
 
 html.dark {
@@ -76,6 +79,11 @@ html.dark {
   --color-accent-red: #eb5757;
   
   --shadow-custom: 0px 3px 13px 5px #17203166;
+
+
+  --clerk-bg: #0f1121;
+  --clerk-text: #ffffff;
+  --clerk-input: #0f1121;
 }
 
 @layer components {
@@ -93,6 +101,13 @@ html.dark {
   }
   .body-text {
     @apply text-secondary font-normal leading-[21px] text-[14px];
+  }
+  .scrollbar::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded;
   }
 }
 
@@ -158,13 +173,6 @@ body {
   animation: shimmer 1.6s infinite linear;
 }
 
-.primary-button {
-  height: 2.5rem; 
-  font-size: 0.875rem; 
-  transition-property: all;
-  transition-duration: 300ms;
-  width: 175px; 
-}
 
 .primary-button:hover {
   box-shadow: var(--shadow-custom);

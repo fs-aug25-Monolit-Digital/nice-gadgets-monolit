@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { HomePage } from '../components/pages/HomePage';
 import { PhonesPage } from '../components/pages/PhonesPage';
 import { TabletsPage } from '../components/pages/TabletsPage';
@@ -9,7 +9,10 @@ import { MainLayout } from '../components/layouts/MainLayout';
 import { FavouritePage } from '../components/pages/FavouritesPage';
 import { CartPage } from '../components/pages/CartPage';
 import { ContactsPage } from '../components/pages/ContactsPage';
+import { SignedOut, SignIn, SignUp } from '@clerk/clerk-react';
+import { SearchResultPage } from '../components/pages/SearchResultPage';
 import { RightsPage } from '../components/pages/RightsPage';
+import { CheckoutPage } from '../components/pages/CheckoutPage';
 
 export const AppRoutes = () => (
   <Routes>
@@ -27,9 +30,24 @@ export const AppRoutes = () => (
       <Route path="/favourites" element={<FavouritePage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path='/contacts' element={<ContactsPage />}/>
+      <Route path='/searchResults' element={<SearchResultPage />}/>
       <Route path='/rights' element={<RightsPage />}/>
+      <Route path='/checkout' element={<CheckoutPage />}/>
       <Route path="*" element={<NotFoundPage />} />
     </Route>
-    <Route path="/home" element={<Navigate to="/" replace />} />
-</Routes>
+
+    <Route path='/sign-in' element={
+      <SignedOut>
+        <SignIn />
+      </SignedOut>
+    } />
+    
+    <Route path='/sign-up' element={
+      <SignedOut>
+        <SignUp />
+      </SignedOut>
+    } />
+
+    <Route path="*" element={<NotFoundPage />} />
+  </Routes>
 );
