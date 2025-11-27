@@ -47,7 +47,6 @@ export const AppRoutes = () => (
         <SignUp />
       </SignedOut>
     } />
-
-    <Route path="*" element={<NotFoundPage />} />
+    
   </Routes>
 );
