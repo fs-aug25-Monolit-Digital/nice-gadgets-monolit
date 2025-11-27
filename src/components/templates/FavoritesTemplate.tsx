@@ -40,7 +40,7 @@ export const FavoritesTemplate: React.FC<FavoritesTemplateProps> = ({
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 gap-y-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 md-lg:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-10">
           {products.map((product) => (
             <div
               key={product.id}
