@@ -52,7 +52,7 @@ export const CartPageTemplate: React.FC<CartPageTemplateProps> = ({
               ))
             : <div className="flex flex-col items-center justify-center py-20">
                 <img
-                  src="/nice-gadgets-monolit/gadgets/img/cart-is-empty.png"
+                  src="gadgets/img/cart-is-empty.png"
                   alt="No cart items"
                   className="w-40 opacity-80"
                 />

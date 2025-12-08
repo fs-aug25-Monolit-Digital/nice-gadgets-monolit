@@ -39,7 +39,7 @@ export const FavoritesTemplate: React.FC<FavoritesTemplateProps> = ({
       {isEmpty ?
         <div className="flex flex-col items-center justify-center min-h-[50vh] w-full text-center">
           <img
-            src="/nice-gadgets-monolit/gadgets/img/favorite-is-empty.png"
+            src="gadgets/img/favorite-is-empty.png"
             alt="No favourite items"
             className="w-40 opacity-80 mb-6"
           />
